@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 54777835207122622}
   - component: {fileID: 114598859409899594}
   - component: {fileID: 114299003088537844}
+  - component: {fileID: 114919335002026698}
   m_Layer: 0
   m_Name: avatar_pf
   m_TagString: Untagged
@@ -112,11 +113,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abc4f4e6e5f32a943be810ecf31fb404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingTime: 100
   currentTime: 0
-  healthSlider: {fileID: 0}
-  flashSpeed: 5
+  timeSlider: {fileID: 0}
   timedImage: {fileID: 0}
+  flashSpeed: 5
   flashColour: {r: 1, g: 0, b: 0, a: 0.1}
 --- !u!114 &114598859409899594
 MonoBehaviour:
@@ -130,6 +130,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+--- !u!114 &114919335002026698
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1987932455151036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3028c35f73003b7488b69d38a50318c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingLife: 5
+  maxLife: 5
+  currentLife: 0
+  lifeImageEvnt: {fileID: 0}
+  flashSpeed: 5
+  damagedColour: {r: 1, g: 0, b: 0, a: 0.3}
+  healedColour: {r: 0, g: 1, b: 0, a: 0.3}
+  hearts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!136 &136110666523540370
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -140,6 +164,6 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
