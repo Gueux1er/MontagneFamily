@@ -14,6 +14,9 @@ public class avatarLife : MonoBehaviour
     public Color damagedColour = new Color(1f, 0f, 0f, 0.3f);
     public Color healedColour = new Color(0f, 1f, 0f, 0.3f);
 
+    public Sprite heartFull;
+    public Sprite heartEmpty;
+
     public Image[]  hearts;
 
 
@@ -83,12 +86,12 @@ public class avatarLife : MonoBehaviour
         for(int i=0; i<maxLife-currentLife; i++)
         {
             // TODO : set with correct empty heart image
-            hearts[i].color = new Color(0f, 0f, 0f, 1f);
+            hearts[i].sprite = heartEmpty;
         }
         for(int i=maxLife-currentLife; i<maxLife; i++)
         {
             // TODO : set with correct heart image
-            hearts[i].color = new Color(1f, 0f, 0f, 1f);
+            hearts[i].sprite = heartFull;
         }
     }
 }
