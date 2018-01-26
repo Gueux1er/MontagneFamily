@@ -49,7 +49,7 @@ public class avatarController : MonoBehaviour
     void OnCollisionStay(Collision collision)
     {
         //Collision Sol
-        if (collision.contacts[0].normal == Vector3.up)
+        if (collision.contacts[0].normal == Vector3.up && rigidbody.velocity.y == 0)
         {
             jumpAbility = true;
         }
