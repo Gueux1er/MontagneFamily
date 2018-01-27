@@ -91,7 +91,7 @@ public class avatarLife : MonoBehaviour
         }
     }
 
-    private void DeathFu()
+    private void Death()
     {
         //TODO animation
         print("animation");
