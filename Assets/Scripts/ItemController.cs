@@ -32,8 +32,10 @@ public class ItemController : MonoBehaviour
 
     }
 
-    public virtual void take()
+    public virtual void take(GameObject other)
     {
+        other.GetComponent<Inventory>().GetItem(this);
+        ApplyEffect(other);
         gameObject.SetActive(false);
     }
 
