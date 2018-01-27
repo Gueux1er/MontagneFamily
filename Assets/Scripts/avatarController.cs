@@ -116,7 +116,7 @@ public class avatarController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Plateform")
+        if(collision.gameObject.tag == "Plateform" && collision.contacts[0].normal == Vector2.up)
         {
 
             reception.start(); // Joue le son une fois
@@ -170,7 +170,8 @@ public class avatarController : MonoBehaviour
             item.ApplyEffect(gameObject);
 
             inventory.GetItem(item);
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
+            //Destroy(other.gameObject);
         }
     }
 

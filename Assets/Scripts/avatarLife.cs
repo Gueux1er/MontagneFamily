@@ -94,7 +94,16 @@ public class avatarLife : MonoBehaviour
     private void Death()
     {
         StartCoroutine(BlinkWhite(true));
+    }
 
+    private void DeathReset()
+    {
+        // Reset position /life/etc
+        GetComponent<avatarController>().ResetPosition();
+        currentLife = startingLife;
+        UpdateHearts();
+
+        GetComponent<Inventory>().EmptyCollected();
     }
 
     IEnumerator BlinkWhite(bool isDead)
@@ -111,10 +120,7 @@ public class avatarLife : MonoBehaviour
 
         if (isDead)
         {
-            // Reset position /life/etc
-            GetComponent<avatarController>().ResetPosition();
-            currentLife = startingLife;
-            UpdateHearts();
+            DeathReset();
         }
 
         yield break;
