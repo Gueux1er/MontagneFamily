@@ -104,6 +104,7 @@ public class avatarController : MonoBehaviour
        
             inventory.GetItem(item);
             print("get an item !");
+
             Destroy(collision.gameObject);
         } else if(collision.gameObject.tag == "Plateform")
         {
@@ -149,6 +150,14 @@ public class avatarController : MonoBehaviour
             
         }
 
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Checkpoint")
+        {
+            inventory.SaveItems();
+        }
     }
 
     public void setAllAgePourAudio(float value)

@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour {
 
-    public List<ItemController> items = new List<ItemController>();
+    public List<ItemController> collectedItems = new List<ItemController>();
+    public List<ItemController> savedItems = new List<ItemController>();
 
     public GameObject pf_imgInventory;
     public Transform parentNode;
@@ -25,12 +26,24 @@ public class Inventory : MonoBehaviour {
     {
         GameObject tmp = Instantiate(pf_imgInventory, parentNode);
         tmp.GetComponent<Image>().sprite = item.image.sprite;
-        items.Add(item);
+        collectedItems.Add(item);
     }
 
     public void RemoveItem(ItemController item)
     {
-        parentNode.GetChild(items.IndexOf(item)).parent = null;
-        items.Remove(item);
+        parentNode.GetChild(collectedItems.IndexOf(item)).parent = null;
+        collectedItems.Remove(item);
     }
+
+    public void SaveItems()
+    {
+        print("save items");
+        foreach(ItemController item in collectedItems)
+        {
+            savedItems.Add(item);
+        }
+        parentNode.DetachChildren();
+        collectedItems = new List<ItemController>();
+    }
+
 }
