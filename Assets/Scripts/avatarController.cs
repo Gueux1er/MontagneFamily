@@ -111,63 +111,44 @@ public class avatarController : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        print("test");
-        //Collision Recoltable
-        if (collision.gameObject.tag == "Recoltable")
-        {
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Collectible"); // Joue le son une fois
-            ItemController item = collision.gameObject.GetComponent<ItemController>();
-            item.ApplyEffect(gameObject);
-
-            inventory.GetItem(item);
-            Destroy(collision.gameObject);
-        }
-    }
-
     void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Plateform")
         {
 
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Reception"); // Joue le son une fois
+
             float highFall = maximumJumpY - rigidbody.position.y;
 
-            if (highFall >= 6)
+            if (highFall >= 12)
             {
                 avatarLife.TakeDamage(5);
-            } else if (highFall >= 5)
+            } else if (highFall >= 11)
             {
                 avatarLife.TakeDamage(4);
-            } else if (highFall >= 4)
+            } else if (highFall >= 9)
             {
                 avatarLife.TakeDamage(2);
-            } else if (highFall >= 3)
+            } else if (highFall >= 7)
             {
                 avatarLife.TakeDamage(1);
             }
 
-            if (!jumpAbility)
+            if(highFall >= 7)
             {
-                jumpAbility = true;
-
-                if (highFall < 3)
+                if (avatarLife.currentLife > 0)
                 {
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Reception"); // Joue le son une fois
-
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Reception_Trop_Haut");
                 }
                 else
                 {
-                    if (avatarLife.currentLife > 0)
-                    {
-                        FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Reception_Trop_Haut");
-                    } else
-                    {
-                        FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Mort_Aplati");
-                    }
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Mort_Aplati");
                 }
-                
             }
+
+
+            jumpAbility = true;
+            
             
         }
 
@@ -178,6 +159,17 @@ public class avatarController : MonoBehaviour
         if (other.gameObject.tag == "Checkpoint")
         {
             inventory.SaveItems();
+        }
+
+        //Collision Recoltable
+        if (other.gameObject.tag == "Recoltable")
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Collectible"); // Joue le son une fois
+            ItemController item = other.gameObject.GetComponent<ItemController>();
+            item.ApplyEffect(gameObject);
+
+            inventory.GetItem(item);
+            Destroy(other.gameObject);
         }
     }
 
