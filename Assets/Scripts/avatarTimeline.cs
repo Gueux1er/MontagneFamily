@@ -43,7 +43,7 @@ public class avatarTimeline : MonoBehaviour {
             timed = true;
             GetComponent<Animator>().SetLayerWeight(1, 1);
 
-        } else if ((int)currentTime == 0.7* lifeExpectancy && age != AvatarAge.OLD)
+        } else if ((int)currentTime == 0.8* lifeExpectancy && age != AvatarAge.OLD)
         {
             age = AvatarAge.OLD;
             avatarController.setAllAgePourAudio(2.0f);
