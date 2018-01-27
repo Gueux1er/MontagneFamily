@@ -107,7 +107,6 @@ public class avatarLife : MonoBehaviour
         {
             if(tabGo[i].GetComponent<ItemController>().isEvolutive)
             {
-                //tabGo[i].GetComponent<ItemController>().
                 tabGo[i].GetComponent<ItemController>().NextGeneration();
             }
         }
@@ -130,6 +129,7 @@ public class avatarLife : MonoBehaviour
         // Reset position /life/etc
         GetComponent<avatarTimeline>().ResetTimeline();
         GetComponent<avatarController>().ResetPosition();
+        GetComponent<avatarController>().ResetStats();
         GetComponent<avatarController>().setAllAgePourAudio(0.0f);
         currentLife = startingLife;
         UpdateHearts();
@@ -139,6 +139,7 @@ public class avatarLife : MonoBehaviour
         instantiateSkeleton(position);
 
         GetComponent<Inventory>().EmptyCollected();
+        GetComponent<Inventory>().AffectEffectSaved();
         GetComponent<avatarController>().moveEnable = true;
         cptTry++;
     }

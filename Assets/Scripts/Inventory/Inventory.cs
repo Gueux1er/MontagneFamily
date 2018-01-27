@@ -120,6 +120,14 @@ public class Inventory : MonoBehaviour {
         updateDisplay();
     }
 
+    public void AffectEffectSaved()
+    {
+        for(int i=0; i<savedItems.Count; i++)
+        {
+            savedItems[i].ApplyEffect();
+        }
+    }
+
     public void DestroyAllChildren(Transform t)
     {
         for (int i = 0; i < t.childCount; i++)
