@@ -91,7 +91,7 @@ public class avatarLife : MonoBehaviour
         }
     }
 
-    private void Death()
+    public void Death()
     {
         StartCoroutine(BlinkWhite(true));
     }
@@ -99,14 +99,18 @@ public class avatarLife : MonoBehaviour
     private void DeathReset()
     {
         // Reset position /life/etc
+        GetComponent<avatarTimeline>().ResetTimeline();
         GetComponent<avatarController>().ResetPosition();
+        GetComponent<avatarController>().setAllAgePourAudio(0.0f);
         currentLife = startingLife;
         UpdateHearts();
+        GetComponent<Animator>().SetLayerWeight(1, 0);
+        GetComponent<Animator>().SetLayerWeight(2, 0);
 
         GetComponent<Inventory>().EmptyCollected();
     }
 
-    IEnumerator BlinkWhite(bool isDead)
+    public IEnumerator BlinkWhite(bool isDead)
     {
         SpriteRenderer sprite_avatar = GetComponent<SpriteRenderer>();
 
@@ -120,6 +124,7 @@ public class avatarLife : MonoBehaviour
 
         if (isDead)
         {
+            yield return new WaitForSeconds(2f);
             DeathReset();
         }
 

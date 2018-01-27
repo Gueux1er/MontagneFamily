@@ -112,8 +112,10 @@ public class Inventory : MonoBehaviour {
     {
         for(int i=0; i<collectedItems.Count; i++)
         {
-            print(collectedItems[i]);
             collectedItems[i].gameObject.SetActive(true);
+        }
+        for (int i = 0; i < collectedItems.Count; i++)
+        {
             RemoveItem(collectedItems[i]);
         }
         updateDisplay();

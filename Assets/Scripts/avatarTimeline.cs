@@ -12,7 +12,7 @@ public class avatarTimeline : MonoBehaviour {
     public Slider timeSlider;
     public Image timedImage;
     public float flashSpeed = 5f;
-    public Color flashColour = new Color(1f, 0f, 0f, 0.3f);
+    public float ratioTime = 1;
 
     avatarController avatarController;
     bool isDeadOld;
@@ -35,7 +35,7 @@ public class avatarTimeline : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        currentTime += Time.deltaTime;
+        currentTime += Time.deltaTime * ratioTime;
         if((int)currentTime == 0.3* lifeExpectancy && age != AvatarAge.ADULT)
         {
             age = AvatarAge.ADULT;
@@ -58,18 +58,20 @@ public class avatarTimeline : MonoBehaviour {
 
         } else if((int)currentTime == lifeExpectancy && age != AvatarAge.DEAD)
         {
-            // TODO : death
             age = AvatarAge.DEAD;
             mortVieillissement.start(); // Jouer un son une fois
 
-            GetComponent<Animator>().SetLayerWeight(1, 0);
-            GetComponent<Animator>().SetLayerWeight(2, 0);
+            essouflement.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            GetComponent<avatarLife>().Death();
         }
 
         if (timed)
         {
-            timedImage.color = flashColour;
-        } else
+            timedImage.color = new Color(0.8f, 0.8f, 0.8f, 0.3f);
+            StartCoroutine(GetComponent<avatarLife>().BlinkWhite(false));
+
+        }
+        else
         {
             timedImage.color = Color.Lerp(timedImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
@@ -77,4 +79,10 @@ public class avatarTimeline : MonoBehaviour {
         timed = false;
         timeSlider.value = currentTime;
 	}
+
+    public void ResetTimeline()
+    {
+        currentTime = 0f; ;
+        age = AvatarAge.YOUNG;
+    }
 }
