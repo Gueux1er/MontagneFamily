@@ -41,13 +41,14 @@ public class avatarTimeline : MonoBehaviour {
             age = AvatarAge.ADULT;
             avatarController.setAllAgePourAudio(1.0f);
             timed = true;
+            GetComponent<Animator>().SetLayerWeight(1, 1);
 
         } else if ((int)currentTime == 0.7* lifeExpectancy && age != AvatarAge.OLD)
         {
             age = AvatarAge.OLD;
             avatarController.setAllAgePourAudio(2.0f);
             timed = true;
-
+            GetComponent<Animator>().SetLayerWeight(2, 1);
 
         } else if ((int)currentTime == lifeExpectancy - 16 && !playingEssouflement) 
         {
@@ -60,6 +61,9 @@ public class avatarTimeline : MonoBehaviour {
             // TODO : death
             age = AvatarAge.DEAD;
             mortVieillissement.start(); // Jouer un son une fois
+
+            GetComponent<Animator>().SetLayerWeight(1, 0);
+            GetComponent<Animator>().SetLayerWeight(2, 0);
         }
 
         if (timed)
