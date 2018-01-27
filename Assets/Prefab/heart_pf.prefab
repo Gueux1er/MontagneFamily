@@ -144,7 +144,7 @@ MonoBehaviour:
   heart: {fileID: 1457036373484438}
   plant: {fileID: 1835204908524310}
   emptyPlantSprite: {fileID: 21300012, guid: 1e8fe626ef24ad74a9c93c1ccf7d01b8, type: 3}
-  fullPlantSprite: {fileID: 0}
+  fullPlantSprite: {fileID: 21300014, guid: 1e8fe626ef24ad74a9c93c1ccf7d01b8, type: 3}
   appearEveryXGeneration: 3
   delaySpawn: 0
 --- !u!212 &212269036742987386
