@@ -8,6 +8,10 @@ public class HeartItemController : ItemController {
     public GameObject heart;
     public GameObject plant;
     public Sprite emptyPlantSprite;
+    public Sprite fullPlantSprite;
+
+    public int appearEveryXGeneration = 3;
+    public int delaySpawn = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -16,6 +20,8 @@ public class HeartItemController : ItemController {
         plantSprite = plant.GetComponent<SpriteRenderer>();
         stuff = new Heart();
         InitPosition();
+        isEvolutive = true;
+        canBeTaken = true;
     }
 	
 	// Update is called once per frame
@@ -28,5 +34,22 @@ public class HeartItemController : ItemController {
         ApplyEffect(gameObject);
         heart.SetActive(false);
         plant.GetComponent<SpriteRenderer>().sprite = emptyPlantSprite;
+        canBeTaken = false;
     }
+
+    public override void NextGeneration()
+    {
+        if(GameObject.FindGameObjectWithTag("Player").GetComponent<avatarLife>().cptTry % appearEveryXGeneration == delaySpawn)
+        {
+            Respawn();
+        }
+    }
+
+    public void Respawn()
+    {
+        heart.SetActive(true);
+        canBeTaken = true;
+        plant.GetComponent<SpriteRenderer>().sprite = fullPlantSprite;
+    }
+
 }
