@@ -11,11 +11,11 @@ public class Inventory : MonoBehaviour {
     public GameObject pf_imgInventory;
     public GameObject pf_bgInventory;
     public Transform InventoryUI;
+
     private Transform InventoryContainerUI;
     private Transform InventoryBgContainerUI;
     private Transform InventoryClosedContainerUI;
 
-    private Sprite firstBgInventory;
     private Sprite closedBgInventory;
 
 
@@ -28,7 +28,6 @@ public class Inventory : MonoBehaviour {
 
         InventoryClosedContainerUI.gameObject.SetActive(false);
 
-        firstBgInventory = Resources.Load<Sprite>("images/firstBgInventory");
         closedBgInventory = Resources.Load<Sprite>("images/closedBgInventory");
     }
 
@@ -71,14 +70,15 @@ public class Inventory : MonoBehaviour {
     {
         GameObject tmp;
 
-        InventoryBgContainerUI.DetachChildren();
-        InventoryContainerUI.DetachChildren();
+        DestroyAllChildren(InventoryBgContainerUI);
+        DestroyAllChildren(InventoryContainerUI);
 
         int nbItems = savedItems.Count;
+
         for (int i=0; i<nbItems; i++)
         {
             tmp = Instantiate(pf_bgInventory, InventoryBgContainerUI);
-            tmp.GetComponent<Image>().sprite = Resources.Load<Sprite>("images/savedBgInventory");
+            tmp.GetComponent<Image>().sprite = Resources.LoadAll<Sprite>("images/tileset_item")[1];
 
             tmp = Instantiate(pf_imgInventory, InventoryContainerUI);
             tmp.GetComponent<Image>().sprite = savedItems[i].GetSpriteRender().sprite;
@@ -88,10 +88,9 @@ public class Inventory : MonoBehaviour {
         for (int i = 0; i < nbItems; i++)
         {
             tmp = Instantiate(pf_bgInventory, InventoryBgContainerUI);
-            tmp.GetComponent<Image>().sprite = Resources.Load<Sprite>("images/collectedBgInventory");
+            tmp.GetComponent<Image>().sprite = Resources.Load<Sprite>("images/tileset_item");
 
             tmp = Instantiate(pf_imgInventory, InventoryContainerUI);
-            print(collectedItems[i]);
             tmp.GetComponent<Image>().sprite = collectedItems[i].GetSpriteRender().sprite;
         }
     }
@@ -103,7 +102,7 @@ public class Inventory : MonoBehaviour {
         {
             savedItems.Add(item);
         }
-        InventoryContainerUI.DetachChildren();
+        DestroyAllChildren(InventoryContainerUI);
         collectedItems = new List<ItemController>();
         updateDisplay();
     }
@@ -113,12 +112,19 @@ public class Inventory : MonoBehaviour {
         for(int i=0; i<collectedItems.Count; i++)
         {
             collectedItems[i].gameObject.SetActive(true);
+            StartCoroutine(collectedItems[i].DisableGatherStart());
         }
-        for (int i = 0; i < collectedItems.Count; i++)
-        {
-            RemoveItem(collectedItems[i]);
-        }
+        collectedItems.Clear();
+
         updateDisplay();
+    }
+
+    public void DestroyAllChildren(Transform t)
+    {
+        for (int i = 0; i < t.childCount; i++)
+        {
+            Destroy(t.GetChild(i).gameObject);
+        }
     }
 
 }
