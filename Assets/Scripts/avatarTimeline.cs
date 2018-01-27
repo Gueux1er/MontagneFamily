@@ -39,15 +39,13 @@ public class avatarTimeline : MonoBehaviour {
         if((int)currentTime == 0.3* lifeExpectancy && age != AvatarAge.ADULT)
         {
             age = AvatarAge.ADULT;
-            avatarController.setAgePourCollectible(1.0f);
-            avatarController.setAgePourSaut(1.0f);
+            avatarController.setAllAgePourAudio(1.0f);
             timed = true;
 
         } else if ((int)currentTime == 0.7* lifeExpectancy && age != AvatarAge.OLD)
         {
             age = AvatarAge.OLD;
-            avatarController.setAgePourCollectible(2.0f);
-            avatarController.setAgePourSaut(2.0f);
+            avatarController.setAllAgePourAudio(2.0f);
             timed = true;
 
 

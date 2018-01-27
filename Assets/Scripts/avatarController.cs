@@ -19,8 +19,14 @@ public class avatarController : MonoBehaviour
     FMOD.Studio.EventInstance collectible; //Instanciation du son
     FMOD.Studio.ParameterInstance agePourCollectible; //Instanciation du paramètre lié au son
 
-    FMOD.Studio.EventInstance saut; //Instanciation du son
-    FMOD.Studio.ParameterInstance agePourSaut; //Instanciation du paramètre lié au son
+    FMOD.Studio.EventInstance saut;
+    FMOD.Studio.ParameterInstance agePourSaut;
+
+    FMOD.Studio.EventInstance reception;
+    FMOD.Studio.ParameterInstance agePourReception;
+
+    FMOD.Studio.EventInstance receptionTropHaut;
+    FMOD.Studio.ParameterInstance agePourReceptionTropHaut;
 
 
     // Use this for initialization
@@ -36,9 +42,17 @@ public class avatarController : MonoBehaviour
         collectible.getParameter("Age", out agePourCollectible); // Va chercher le paramètre FMOD "Age" et le stocke dans le paramètre "agePourCollectible".
         agePourCollectible.setValue(0.0f); // Valeur du paramètre en début de partie
 
-        saut = FMODUnity.RuntimeManager.CreateInstance("event:/Avatar/Saut"); // Chemin du son 
-        saut.getParameter("Age", out agePourSaut); // Va chercher le paramètre FMOD "Age" et le stocke dans le paramètre "agePourSaut".
-        agePourSaut.setValue(0.0f); // Valeur du paramètre en début de partie
+        saut = FMODUnity.RuntimeManager.CreateInstance("event:/Avatar/Saut");
+        saut.getParameter("Age", out agePourSaut); 
+        agePourSaut.setValue(0.0f);
+
+        reception = FMODUnity.RuntimeManager.CreateInstance("event:/Avatar/Reception");
+        reception.getParameter("Age", out agePourReception);
+        agePourReception.setValue(0.0f);
+
+        receptionTropHaut = FMODUnity.RuntimeManager.CreateInstance("event:/Avatar/Reception_Trop_Haut");
+        receptionTropHaut.getParameter("Age", out agePourReceptionTropHaut);
+        agePourReceptionTropHaut.setValue(0.0f);
     }
 
     // Update is called once per frame
@@ -72,16 +86,6 @@ public class avatarController : MonoBehaviour
         }
     }
 
-    public void setAgePourCollectible(float value)
-    {
-        agePourCollectible.setValue(value);
-    }
-
-    public void setAgePourSaut(float value)
-    {
-        agePourSaut.setValue(value);
-    }
-
     void OnCollisionEnter2D(Collision2D collision)
     {
         //Collision Recoltable
@@ -97,6 +101,7 @@ public class avatarController : MonoBehaviour
         } else if(collision.gameObject.tag == "Plateform")
         {
 
+            //ne marche pas tjs
             float highFall = maximumJumpY - rigidbody.velocity.y;
 
             if (highFall >= 6)
@@ -112,9 +117,31 @@ public class avatarController : MonoBehaviour
             {
                 avatarLife.TakeDamage(1);
             }
-            jumpAbility = true;
+
+            if (!jumpAbility)
+            {
+                jumpAbility = true;
+            
+                if(highFall < 3)
+                {
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Reception"); // Joue le son une fois
+                } else if(avatarLife.currentLife > 0)
+                {
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Reception_Trop_Haut");
+                }
+                
+            }
+            
         }
 
+    }
+
+    public void setAllAgePourAudio(float value)
+    {
+        agePourCollectible.setValue(value);
+        agePourSaut.setValue(value);
+        agePourReception.setValue(value);
+        agePourReceptionTropHaut.setValue(value);
     }
 
 }
