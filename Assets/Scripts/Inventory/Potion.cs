@@ -2,14 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Star : Stuff
+public class Potion : Stuff
 {
-    public static string spriteName = "images/hearts";
-
-    public Star()
-    {
-        sprite = Resources.Load<Sprite>(spriteName);
-    }
 
     public override void ApplyEffect(GameObject gameObject)
     {

@@ -173,9 +173,9 @@ public class avatarController : MonoBehaviour
             collectible.start(); // Joue le son une fois
             ItemController item = other.gameObject.GetComponent<ItemController>();
             item.ApplyEffect(gameObject);
-
+            item.take();
             inventory.GetItem(item);
-            other.gameObject.SetActive(false);
+            //other.gameObject.SetActive(false);
             //Destroy(other.gameObject);
         }
     }
