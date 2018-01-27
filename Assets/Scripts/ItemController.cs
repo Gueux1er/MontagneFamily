@@ -50,4 +50,10 @@ public class ItemController : MonoBehaviour {
     {
         GetComponent<Transform>().position.Set(initX, initY, 0f);
     }
-}
+
+    public IEnumerator DisableGatherStart()
+    {
+        
+        yield return new WaitForSeconds(2f);
+        yield break;
+    }
