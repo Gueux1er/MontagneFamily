@@ -93,24 +93,28 @@ public class avatarLife : MonoBehaviour
 
     private void Death()
     {
-        //TODO animation
-        print("animation");
+        StartCoroutine(BlinkWhite(true));
 
-        // Reset position /life/etc
-        StartCoroutine(BlinkWhite());
-        GetComponent<avatarController>().ResetPosition();
-        currentLife = startingLife;
-        UpdateHearts();
     }
 
-    IEnumerator BlinkWhite()
+    IEnumerator BlinkWhite(bool isDead)
     {
-        Rigidbody2D avatar_rigidbody = GetComponent<Rigidbody2D>();
+        SpriteRenderer sprite_avatar = GetComponent<SpriteRenderer>();
 
         for (int i =0; i<3; i++)
         {
-
+            sprite_avatar.color = new Color(1f, 1f, 1f, 0.5f);
             yield return new WaitForSeconds(0.2f);
+            sprite_avatar.color = new Color(1f, 1f, 1f, 1f);
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        if (isDead)
+        {
+            // Reset position /life/etc
+            GetComponent<avatarController>().ResetPosition();
+            currentLife = startingLife;
+            UpdateHearts();
         }
 
         yield break;
