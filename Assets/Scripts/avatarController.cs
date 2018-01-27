@@ -109,7 +109,7 @@ public class avatarController : MonoBehaviour
         {
 
             //ne marche pas tjs
-            float highFall = maximumJumpY - rigidbody.velocity.y;
+            float highFall = maximumJumpY - rigidbody.position.y;
 
             if (highFall >= 6)
             {
