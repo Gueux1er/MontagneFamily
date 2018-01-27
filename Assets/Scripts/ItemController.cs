@@ -7,14 +7,13 @@ public class ItemController : MonoBehaviour {
     public enum ItemType { STAR, HEART}
     public ItemType type;
     private Stuff stuff;
-    private SpriteRenderer image;
+    public SpriteRenderer image;
 
     // Use this for initialization
     void Start () {
         InitType();
         image = GetComponent<SpriteRenderer>();
         image.sprite = stuff.GetSprite();
-        print(image.sprite.name);
     }
 	
 	// Update is called once per frame
