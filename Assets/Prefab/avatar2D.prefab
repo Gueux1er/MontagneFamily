@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114085052534194814}
   - component: {fileID: 114486262837141734}
   - component: {fileID: 114093990422977176}
+  - component: {fileID: 111009367196827820}
   m_Layer: 0
   m_Name: avatar2D
   m_TagString: Untagged
@@ -91,6 +92,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.26, y: 0.31}
   m_EdgeRadius: 0
+--- !u!111 &111009367196827820
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1922525768687750}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &114085052534194814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128,7 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91489a0e295d241408ce5d97067a2ba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
+  collectedItems: []
+  savedItems: []
   pf_imgInventory: {fileID: 1223899143860442, guid: f2ab47ef97c8133448288d575862ade2,
     type: 2}
   pf_bgInventory: {fileID: 1226491364024786, guid: bffe1f199299adb49a044312c0ab1f41,
@@ -147,6 +163,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   jumpForce: 15
+  defaultX: 0
+  defaultY: 1.5
 --- !u!114 &114486262837141734
 MonoBehaviour:
   m_ObjectHideFlags: 1
