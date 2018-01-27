@@ -62,8 +62,9 @@ public class ItemController : MonoBehaviour
 
     public IEnumerator DisableGatherStart()
     {
-
+        GetComponent<Collider2D>().enabled = false;
         yield return new WaitForSeconds(2f);
+        GetComponent<Collider2D>().enabled = true;
         yield break;
     }
 }

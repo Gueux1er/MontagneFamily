@@ -112,6 +112,7 @@ public class Inventory : MonoBehaviour {
         for(int i=0; i<collectedItems.Count; i++)
         {
             collectedItems[i].gameObject.SetActive(true);
+            StartCoroutine(collectedItems[i].DisableGatherStart());
         }
         collectedItems.Clear();
 
