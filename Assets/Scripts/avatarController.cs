@@ -88,7 +88,7 @@ public class avatarController : MonoBehaviour
 
     void jump()
     {
-        if (Input.GetButtonDown("Jump") && jumpAbility)
+        if (Input.GetButton("Jump") && jumpAbility)
         {
             rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             jumpAbility = false;
