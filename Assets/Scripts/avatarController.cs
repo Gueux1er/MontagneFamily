@@ -75,6 +75,9 @@ public class avatarController : MonoBehaviour
     void movement()
     {
         float h = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+        GetComponent<Animator>().SetBool("IsWalk", (h != 0) ? true : false);
+        if (h != 0)
+            GetComponent<SpriteRenderer>().flipX = (h < 0) ? true : false;
         transform.Translate(Vector2.right * h);
     }
 
@@ -90,6 +93,7 @@ public class avatarController : MonoBehaviour
     {
         if (Input.GetButton("Jump") && jumpAbility)
         {
+            GetComponent<Animator>().SetBool("IsJump", true);
             rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             jumpAbility = false;
             saut.start(); // Joue le son une fois
@@ -118,6 +122,7 @@ public class avatarController : MonoBehaviour
     {
         if(collision.gameObject.tag == "Plateform")
         {
+            GetComponent<Animator>().SetBool("IsJump", false);
 
             reception.start(); // Joue le son une fois
 
