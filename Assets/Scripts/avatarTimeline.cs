@@ -19,6 +19,7 @@ public class avatarTimeline : MonoBehaviour {
     bool timed;
 
     FMOD.Studio.EventInstance essouflement; //Instanciation du son
+    FMOD.Studio.EventInstance mortVieillissement; //Instanciation du son
 
     // Use this for initialization
     void Start () {
@@ -28,6 +29,7 @@ public class avatarTimeline : MonoBehaviour {
         age = AvatarAge.YOUNG;
 
         essouflement = FMODUnity.RuntimeManager.CreateInstance("event:/Avatar/Essouflement"); // Chemin du son 
+        mortVieillissement = FMODUnity.RuntimeManager.CreateInstance("event:/Avatar/Mort_Vieillissement"); // Chemin du son 
     }
 	
 	// Update is called once per frame
@@ -48,13 +50,12 @@ public class avatarTimeline : MonoBehaviour {
         } else if ((int)currentTime == lifeExpectancy - 16) //L'avatar n'a plus que 16 secondes à vivre
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Essouflement"); // Jouer un son une fois
-        }
 
-
-        else if(currentTime >= lifeExpectancy)
+        } else if((int)currentTime == lifeExpectancy)
         {
             // TODO : death
             age = AvatarAge.DEAD;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Mort_Vieillissement"); // Jouer un son une fois
         }
 
         if (timed)
