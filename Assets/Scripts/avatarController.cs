@@ -65,8 +65,10 @@ public class avatarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        print(maximumJumpY);
         movement();
         jump();
+        inventoryManager();
     }
 
     void movement()
@@ -75,12 +77,19 @@ public class avatarController : MonoBehaviour
         transform.Translate(Vector2.right * h);
     }
 
+    void inventoryManager()
+    {
+        if(Input.GetButtonDown("Inventory"))
+        {
+            GetComponent<Inventory>().ToggleVisibility();
+        }
+    }
+
     void jump()
     {
         if (Input.GetButtonDown("Jump") && jumpAbility)
         {
             rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-            maximumJumpY = rigidbody.position.y;
             jumpAbility = false;
             FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Saut"); // Joue le son une fois
         }
@@ -90,6 +99,16 @@ public class avatarController : MonoBehaviour
             {
                 maximumJumpY = rigidbody.position.y;
             }
+        }
+        if(rigidbody.velocity.y == 0)
+        {
+            // QUand on est au sol, on reset la position du maxjump
+            maximumJumpY = rigidbody.position.y; ;
+        }
+        if(rigidbody.velocity.y < 0)
+        {
+            // Pour empecher de faire un saut dans le vide, si on est tombé en se lancant glisser
+            jumpAbility = false;
         }
     }
 
@@ -108,7 +127,6 @@ public class avatarController : MonoBehaviour
         } else if(collision.gameObject.tag == "Plateform")
         {
 
-            //ne marche pas tjs
             float highFall = maximumJumpY - rigidbody.position.y;
 
             if (highFall >= 6)
