@@ -7,6 +7,6 @@ public class Potion : Stuff
 
     public override void ApplyEffect(GameObject gameObject)
     {
-        gameObject.GetComponent<Renderer>().material.color = Color.yellow;
+        gameObject.GetComponent<avatarTimeline>().ratioTime = 0.5f;
     }
 }

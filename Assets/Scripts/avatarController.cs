@@ -181,13 +181,14 @@ public class avatarController : MonoBehaviour
         //Collision Recoltable
         if (other.gameObject.tag == "Recoltable")
         {
-            collectible.start(); // Joue le son une fois
             ItemController item = other.gameObject.GetComponent<ItemController>();
-            
-            item.take(gameObject);
-         
-            //other.gameObject.SetActive(false);
-            //Destroy(other.gameObject);
+            if(item.canBeTaken)
+            {
+
+                item.take(gameObject);
+
+                collectible.start(); // Joue le son une fois
+            }
         }
     }
 

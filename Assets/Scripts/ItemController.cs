@@ -8,6 +8,8 @@ public class ItemController : MonoBehaviour
     public enum ItemType { POTION, HEART }
     public ItemType type;
     protected Stuff stuff;
+    public bool canBeTaken;
+    public bool isEvolutive;
     public float initX;
     public float initY;
 
@@ -24,6 +26,8 @@ public class ItemController : MonoBehaviour
         imageRenderer = GetComponent<SpriteRenderer>();
         InitType();
         InitPosition();
+
+        canBeTaken = true;
     }
 
     // Update is called once per frame
@@ -49,12 +53,19 @@ public class ItemController : MonoBehaviour
         switch (type)
         {
             case ItemType.POTION:
+                isEvolutive = false;
                 stuff = new Potion();
                 break;
             case ItemType.HEART:
+                isEvolutive = true;
                 stuff = new Heart();
                 break;
         }
+    }
+
+    public virtual void NextGeneration()
+    {
+        // for heritage
     }
 
     public void InitPosition()
