@@ -80,7 +80,7 @@ public class avatarController : MonoBehaviour
     public void StopAllAnim()
     {
         GetComponent<Animator>().SetBool("IsWalk", false);
-        GetComponent<Animator>().SetBool("Jump", false);
+        GetComponent<Animator>().SetBool("IsJump", false);
     }
 
     void movement()
