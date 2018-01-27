@@ -90,7 +90,7 @@ public class avatarController : MonoBehaviour
         {
             rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             jumpAbility = false;
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Saut"); // Joue le son une fois
+            saut.start(); // Joue le son une fois
         }
         if(!jumpAbility)
         {
@@ -116,7 +116,7 @@ public class avatarController : MonoBehaviour
         if(collision.gameObject.tag == "Plateform")
         {
 
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Reception"); // Joue le son une fois
+            reception.start(); // Joue le son une fois
 
             float highFall = maximumJumpY - rigidbody.position.y;
 
@@ -138,11 +138,11 @@ public class avatarController : MonoBehaviour
             {
                 if (avatarLife.currentLife > 0)
                 {
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Reception_Trop_Haut");
+                    receptionTropHaut.start();
                 }
                 else
                 {
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Mort_Aplati");
+                    mortAplati.start();
                 }
             }
 
@@ -164,7 +164,7 @@ public class avatarController : MonoBehaviour
         //Collision Recoltable
         if (other.gameObject.tag == "Recoltable")
         {
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Collectible"); // Joue le son une fois
+            collectible.start(); // Joue le son une fois
             ItemController item = other.gameObject.GetComponent<ItemController>();
             item.ApplyEffect(gameObject);
 
