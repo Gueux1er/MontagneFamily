@@ -65,7 +65,6 @@ public class avatarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(maximumJumpY);
         movement();
         jump();
         inventoryManager();
@@ -108,7 +107,7 @@ public class avatarController : MonoBehaviour
         if(rigidbody.velocity.y < 0)
         {
             // Pour empecher de faire un saut dans le vide, si on est tombé en se lancant glisser
-            jumpAbility = false;
+            //jumpAbility = false;
         }
     }
 
@@ -122,7 +121,6 @@ public class avatarController : MonoBehaviour
             item.ApplyEffect(gameObject);
        
             inventory.GetItem(item);
-            print("get an item !");
             Destroy(collision.gameObject);
         } else if(collision.gameObject.tag == "Plateform")
         {
