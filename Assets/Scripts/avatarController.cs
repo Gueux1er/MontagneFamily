@@ -8,7 +8,7 @@ public class avatarController : MonoBehaviour
     public float jumpForce = 20;
 
     private bool jumpAbility = true;
-    private Rigidbody rigidbody;
+    private Rigidbody2D rigidbody;
     private avatarLife avatarLife;
     private float maximumJumpY;
 
@@ -18,7 +18,7 @@ public class avatarController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody2D>();
         inventory = GetComponent<Inventory>();
         avatarLife = GetComponent<avatarLife>();
 
@@ -34,14 +34,14 @@ public class avatarController : MonoBehaviour
     void movement()
     {
         float h = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
-        transform.Translate(Vector3.right * h);
+        transform.Translate(Vector2.right * h);
     }
 
     void jump()
     {
         if (Input.GetButtonDown("Jump") && jumpAbility)
         {
-            rigidbody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+            rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             maximumJumpY = rigidbody.position.y;
             jumpAbility = false;
         }
@@ -54,7 +54,7 @@ public class avatarController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         //Collision Recoltable
         if (collision.gameObject.tag == "Recoltable")
@@ -67,6 +67,7 @@ public class avatarController : MonoBehaviour
             Destroy(collision.gameObject);
         } else if(collision.gameObject.tag == "Plateform")
         {
+
             float highFall = maximumJumpY - rigidbody.velocity.y;
 
             if (highFall >= 6)
