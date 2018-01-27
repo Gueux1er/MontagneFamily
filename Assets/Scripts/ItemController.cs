@@ -7,13 +7,22 @@ public class ItemController : MonoBehaviour {
     public enum ItemType { STAR, HEART}
     public ItemType type;
     private Stuff stuff;
-    public SpriteRenderer image;
+    public float initX;
+    public float initY;
+
+    private SpriteRenderer imageRenderer;
+
+    public SpriteRenderer GetSpriteRender()
+    {
+        return imageRenderer;
+    }
 
     // Use this for initialization
     void Start () {
         InitType();
-        image = GetComponent<SpriteRenderer>();
-        image.sprite = stuff.GetSprite();
+        imageRenderer = GetComponent<SpriteRenderer>();
+        imageRenderer.sprite = stuff.GetSprite();
+        InitPosition();
     }
 	
 	// Update is called once per frame
@@ -35,5 +44,10 @@ public class ItemController : MonoBehaviour {
             case ItemType.HEART: stuff = new Heart();
                 break;
         }
+    }
+
+    public void InitPosition()
+    {
+        GetComponent<Transform>().position.Set(initX, initY, 0f);
     }
 }
