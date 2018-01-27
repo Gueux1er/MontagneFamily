@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class avatarTimeline : MonoBehaviour {
 
+    public enum AvatarAge { YOUNG, ADULT, OLD, DEAD};
+    private AvatarAge age;
     public float currentTime;
+    public float lifeExpectancy = 100f;
     public Slider timeSlider;
     public Image timedImage;
     public float flashSpeed = 5f;
@@ -15,25 +18,48 @@ public class avatarTimeline : MonoBehaviour {
     bool isDeadOld;
     bool timed;
 
-	// Use this for initialization
-	void Start () {
+    FMOD.Studio.EventInstance essouflement; //Instanciation du son
+    bool playingEssouflement = false;
+    FMOD.Studio.EventInstance mortVieillissement; //Instanciation du son
+
+    // Use this for initialization
+    void Start () {
 
         avatarController = GetComponent<avatarController>();
         currentTime = 0f; ;
-		
-	}
+        age = AvatarAge.YOUNG;
+
+        essouflement = FMODUnity.RuntimeManager.CreateInstance("event:/Avatar/Essouflement"); // Chemin du son 
+        mortVieillissement = FMODUnity.RuntimeManager.CreateInstance("event:/Avatar/Mort_Vieillissement"); // Chemin du son 
+    }
 	
 	// Update is called once per frame
 	void Update () {
         currentTime += Time.deltaTime;
-        if (((int)currentTime) == 70 || ((int)currentTime) == 30)
+        if((int)currentTime == 0.3* lifeExpectancy && age != AvatarAge.ADULT)
         {
+            age = AvatarAge.ADULT;
+            avatarController.setAllAgePourAudio(1.0f);
             timed = true;
-        }
 
-        if(currentTime <= 0)
+        } else if ((int)currentTime == 0.7* lifeExpectancy && age != AvatarAge.OLD)
+        {
+            age = AvatarAge.OLD;
+            avatarController.setAllAgePourAudio(2.0f);
+            timed = true;
+
+
+        } else if ((int)currentTime == lifeExpectancy - 16 && !playingEssouflement) 
+        {
+            //L'avatar n'a plus que 16 secondes à vivre
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Essouflement"); // Jouer un son une fois
+            playingEssouflement = true;
+
+        } else if((int)currentTime == lifeExpectancy && age != AvatarAge.DEAD)
         {
             // TODO : death
+            age = AvatarAge.DEAD;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Mort_Vieillissement"); // Jouer un son une fois
         }
 
         if (timed)
