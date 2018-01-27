@@ -6,6 +6,10 @@ public class avatarController : MonoBehaviour
 {
     public float moveSpeed = 2;
     public float jumpForce = 20;
+    public float defaultX = 0f;
+    public float defaultY = 1.5f;
+
+    public bool moveEnable = true;
 
     private bool jumpAbility = true;
     private Rigidbody2D rigidbody;
@@ -65,14 +69,26 @@ public class avatarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement();
-        jump();
-        inventoryManager();
+        if(moveEnable)
+        {
+            movement();
+            jump();
+            inventoryManager();
+        }
+    }
+
+    public void StopAllAnim()
+    {
+        GetComponent<Animator>().SetBool("IsWalk", false);
+        GetComponent<Animator>().SetBool("Jump", false);
     }
 
     void movement()
     {
         float h = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+        GetComponent<Animator>().SetBool("IsWalk", (h != 0) ? true : false);
+        if (h != 0)
+            GetComponent<SpriteRenderer>().flipX = (h < 0) ? true : false;
         transform.Translate(Vector2.right * h);
     }
 
@@ -86,11 +102,12 @@ public class avatarController : MonoBehaviour
 
     void jump()
     {
-        if (Input.GetButtonDown("Jump") && jumpAbility)
+        if (Input.GetButton("Jump") && jumpAbility)
         {
+            GetComponent<Animator>().SetBool("IsJump", true);
             rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             jumpAbility = false;
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Saut"); // Joue le son une fois
+            saut.start(); // Joue le son une fois
         }
         if(!jumpAbility)
         {
@@ -103,20 +120,22 @@ public class avatarController : MonoBehaviour
         {
             // QUand on est au sol, on reset la position du maxjump
             maximumJumpY = rigidbody.position.y; ;
+            jumpAbility = true;
         }
-        if(rigidbody.velocity.y < 0)
+        if (rigidbody.velocity.y < 0)
         {
             // Pour empecher de faire un saut dans le vide, si on est tombé en se lancant glisser
-            //jumpAbility = false;
+            jumpAbility = false;
         }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Plateform")
+        if(collision.gameObject.tag == "Plateform" && collision.contacts[0].normal == Vector2.up)
         {
+            GetComponent<Animator>().SetBool("IsJump", false);
 
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Reception"); // Joue le son une fois
+            reception.start(); // Joue le son une fois
 
             float highFall = maximumJumpY - rigidbody.position.y;
 
@@ -138,17 +157,15 @@ public class avatarController : MonoBehaviour
             {
                 if (avatarLife.currentLife > 0)
                 {
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Reception_Trop_Haut");
+                    receptionTropHaut.start();
                 }
                 else
                 {
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Mort_Aplati");
+                    mortAplati.start();
                 }
             }
 
-
             jumpAbility = true;
-            
             
         }
 
@@ -164,12 +181,13 @@ public class avatarController : MonoBehaviour
         //Collision Recoltable
         if (other.gameObject.tag == "Recoltable")
         {
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Collectible"); // Joue le son une fois
+            collectible.start(); // Joue le son une fois
             ItemController item = other.gameObject.GetComponent<ItemController>();
             item.ApplyEffect(gameObject);
-
+            item.take();
             inventory.GetItem(item);
-            Destroy(other.gameObject);
+            //other.gameObject.SetActive(false);
+            //Destroy(other.gameObject);
         }
     }
 
@@ -180,6 +198,12 @@ public class avatarController : MonoBehaviour
         agePourReception.setValue(value);
         agePourReceptionTropHaut.setValue(value);
         agePourMortAplati.setValue(value);
+    }
+
+    public void ResetPosition()
+    {
+        rigidbody.velocity = new Vector2(0,0);
+        rigidbody.MovePosition(new Vector2(defaultX, defaultY));
     }
 
 }

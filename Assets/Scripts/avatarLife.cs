@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class avatarLife : MonoBehaviour
 {
-
+    private int cptTry = 1;
     public int startingLife = 5;
     public int maxLife = 5;
     public int currentLife;
@@ -59,7 +59,7 @@ public class avatarLife : MonoBehaviour
         if(currentLife <= 0)
         {
             currentLife = 0;
-            // TODO : death
+            Death();
         }
 
         UpdateHearts();
@@ -89,5 +89,49 @@ public class avatarLife : MonoBehaviour
         {
             hearts[i].sprite = heartFull;
         }
+    }
+
+    public void Death()
+    {
+        GetComponent<avatarController>().moveEnable = false;
+        GetComponent<avatarController>().StopAllAnim();
+        StartCoroutine(BlinkWhite(true));
+    }
+
+    private void DeathReset()
+    {
+        // Reset position /life/etc
+        GetComponent<avatarTimeline>().ResetTimeline();
+        GetComponent<avatarController>().ResetPosition();
+        GetComponent<avatarController>().setAllAgePourAudio(0.0f);
+        currentLife = startingLife;
+        UpdateHearts();
+        GetComponent<Animator>().SetLayerWeight(1, 0);
+        GetComponent<Animator>().SetLayerWeight(2, 0);
+
+        GetComponent<Inventory>().EmptyCollected();
+        GetComponent<avatarController>().moveEnable = true;
+        cptTry++;
+    }
+
+    public IEnumerator BlinkWhite(bool isDead)
+    {
+        SpriteRenderer sprite_avatar = GetComponent<SpriteRenderer>();
+
+        for (int i =0; i<3; i++)
+        {
+            sprite_avatar.color = new Color(1f, 1f, 1f, 0.5f);
+            yield return new WaitForSeconds(0.2f);
+            sprite_avatar.color = new Color(1f, 1f, 1f, 1f);
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        if (isDead)
+        {
+            yield return new WaitForSeconds(2f);
+            DeathReset();
+        }
+
+        yield break;
     }
 }

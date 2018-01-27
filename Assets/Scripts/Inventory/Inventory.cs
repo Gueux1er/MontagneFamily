@@ -11,35 +11,24 @@ public class Inventory : MonoBehaviour {
     public GameObject pf_imgInventory;
     public GameObject pf_bgInventory;
     public Transform InventoryUI;
+
     private Transform InventoryContainerUI;
     private Transform InventoryBgContainerUI;
     private Transform InventoryClosedContainerUI;
 
-    private Sprite firstBgInventory;
-    private Sprite middleBgInventory;
-    private Sprite lastBgInventory;
-    private Sprite firstAndLastBgInventory;
     private Sprite closedBgInventory;
 
 
 
     // Use this for initialization
     void Start () {
-        InventoryContainerUI = InventoryUI.GetChild(1);
         InventoryBgContainerUI = InventoryUI.GetChild(0);
+        InventoryContainerUI = InventoryUI.GetChild(1);
         InventoryClosedContainerUI = InventoryUI.GetChild(2);
 
         InventoryClosedContainerUI.gameObject.SetActive(false);
 
-        firstBgInventory = Resources.Load<Sprite>("images/firstBgInventory");
-        middleBgInventory = Resources.Load<Sprite>("images/middleBgInventory");
-        lastBgInventory = Resources.Load<Sprite>("images/lastBgInventory");
-        firstAndLastBgInventory = Resources.Load<Sprite>("images/firstAndLastBgInventory");
         closedBgInventory = Resources.Load<Sprite>("images/closedBgInventory");
-
-        // Init the display to set it empty
-        GameObject tmp = Instantiate(pf_bgInventory, InventoryBgContainerUI);
-        tmp.GetComponent<Image>().sprite = firstAndLastBgInventory;
     }
 
     // Update is called once per frame
@@ -50,17 +39,15 @@ public class Inventory : MonoBehaviour {
     public void GetItem(ItemController item)
     {
         //Add the object to UI
-        GameObject tmp = Instantiate(pf_imgInventory, InventoryContainerUI);
-        tmp.GetComponent<Image>().sprite = item.image.sprite;
         collectedItems.Add(item);
-        updateBackground();
+        updateDisplay();
     }
 
     public void RemoveItem(ItemController item)
     {
         InventoryContainerUI.GetChild(collectedItems.IndexOf(item)).parent = null;
         collectedItems.Remove(item);
-        updateBackground();
+        updateDisplay();
     }
 
     public void ToggleVisibility()
@@ -79,33 +66,32 @@ public class Inventory : MonoBehaviour {
         }
     }
 
-    private void updateBackground()
+    private void updateDisplay()
     {
-        int nbItems = collectedItems.Count;
         GameObject tmp;
-        InventoryBgContainerUI.DetachChildren();
 
-        if (nbItems == 0 ||nbItems == 1) {
-            //Add the background to UI
-            tmp = Instantiate(pf_bgInventory, InventoryBgContainerUI);
-            tmp.GetComponent<Image>().sprite = firstAndLastBgInventory;
-        } else
+        DestroyAllChildren(InventoryBgContainerUI);
+        DestroyAllChildren(InventoryContainerUI);
+
+        int nbItems = savedItems.Count;
+
+        for (int i=0; i<nbItems; i++)
         {
             tmp = Instantiate(pf_bgInventory, InventoryBgContainerUI);
-            tmp.GetComponent<Image>().sprite = firstBgInventory;
+            tmp.GetComponent<Image>().sprite = Resources.LoadAll<Sprite>("images/tileset_item")[1];
+
+            tmp = Instantiate(pf_imgInventory, InventoryContainerUI);
+            tmp.GetComponent<Image>().sprite = savedItems[i].GetSpriteRender().sprite;
         }
-        if(nbItems > 2)
-        {
-            for(int i=1; i<nbItems-1; i++)
-            {
-                tmp = Instantiate(pf_bgInventory, InventoryBgContainerUI);
-                tmp.GetComponent<Image>().sprite = middleBgInventory;
-            }
-        }
-        if(nbItems > 1)
+
+        nbItems = collectedItems.Count;
+        for (int i = 0; i < nbItems; i++)
         {
             tmp = Instantiate(pf_bgInventory, InventoryBgContainerUI);
-            tmp.GetComponent<Image>().sprite = lastBgInventory;
+            tmp.GetComponent<Image>().sprite = Resources.Load<Sprite>("images/tileset_item");
+
+            tmp = Instantiate(pf_imgInventory, InventoryContainerUI);
+            tmp.GetComponent<Image>().sprite = collectedItems[i].GetSpriteRender().sprite;
         }
     }
 
@@ -116,9 +102,29 @@ public class Inventory : MonoBehaviour {
         {
             savedItems.Add(item);
         }
-        InventoryContainerUI.DetachChildren();
+        DestroyAllChildren(InventoryContainerUI);
         collectedItems = new List<ItemController>();
-        updateBackground();
+        updateDisplay();
+    }
+
+    public void EmptyCollected()
+    {
+        for(int i=0; i<collectedItems.Count; i++)
+        {
+            collectedItems[i].gameObject.SetActive(true);
+            StartCoroutine(collectedItems[i].DisableGatherStart());
+        }
+        collectedItems.Clear();
+
+        updateDisplay();
+    }
+
+    public void DestroyAllChildren(Transform t)
+    {
+        for (int i = 0; i < t.childCount; i++)
+        {
+            Destroy(t.GetChild(i).gameObject);
+        }
     }
 
 }

@@ -2,24 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemController : MonoBehaviour {
+public class ItemController : MonoBehaviour
+{
 
-    public enum ItemType { STAR, HEART}
+    public enum ItemType { POTION, HEART }
     public ItemType type;
-    private Stuff stuff;
-    public SpriteRenderer image;
+    protected Stuff stuff;
+    public float initX;
+    public float initY;
+
+    protected SpriteRenderer imageRenderer;
+
+    public SpriteRenderer GetSpriteRender()
+    {
+        return imageRenderer;
+    }
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
+        imageRenderer = GetComponent<SpriteRenderer>();
         InitType();
-        image = GetComponent<SpriteRenderer>();
-        image.sprite = stuff.GetSprite();
+        InitPosition();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    public virtual void take()
+    {
+        gameObject.SetActive(false);
+    }
 
     public void ApplyEffect(GameObject gameObject)
     {
@@ -30,10 +46,25 @@ public class ItemController : MonoBehaviour {
     {
         switch (type)
         {
-            case ItemType.STAR: stuff = new Star();
+            case ItemType.POTION:
+                stuff = new Potion();
                 break;
-            case ItemType.HEART: stuff = new Heart();
+            case ItemType.HEART:
+                stuff = new Heart();
                 break;
         }
+    }
+
+    public void InitPosition()
+    {
+        GetComponent<Transform>().position.Set(initX, initY, 0f);
+    }
+
+    public IEnumerator DisableGatherStart()
+    {
+        GetComponent<Collider2D>().enabled = false;
+        yield return new WaitForSeconds(2f);
+        GetComponent<Collider2D>().enabled = true;
+        yield break;
     }
 }
