@@ -14,7 +14,7 @@ public class ItemController : MonoBehaviour {
         InitType();
         image = GetComponent<SpriteRenderer>();
         image.sprite = stuff.GetSprite();
-        print(image.sprite.name);
+
     }
 	
 	// Update is called once per frame
