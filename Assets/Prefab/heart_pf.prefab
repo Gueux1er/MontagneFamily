@@ -137,12 +137,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5719c9b137b6e6443833068232f61c49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
+  isEvolutive: 0
   initX: 0
   initY: 0
   heart: {fileID: 1457036373484438}
   plant: {fileID: 1835204908524310}
   emptyPlantSprite: {fileID: 21300012, guid: 1e8fe626ef24ad74a9c93c1ccf7d01b8, type: 3}
+  fullPlantSprite: {fileID: 0}
+  appearEveryXGeneration: 3
+  delaySpawn: 0
 --- !u!212 &212269036742987386
 SpriteRenderer:
   m_ObjectHideFlags: 1

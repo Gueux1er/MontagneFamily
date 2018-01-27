@@ -101,10 +101,14 @@ public class avatarLife : MonoBehaviour
         GameObject[] tabGo = GameObject.FindGameObjectsWithTag("Recoltable");
         for(int i=0; i<tabGo.Length; i++)
         {
+            /*
+            print(tabGo[i].GetComponent<ItemController>().isEvolutive);
             if(tabGo[i].GetComponent<ItemController>().isEvolutive)
             {
+                print("test");
                 //tabGo[i].GetComponent<ItemController>().
             }
+            */
         }
     }
 
