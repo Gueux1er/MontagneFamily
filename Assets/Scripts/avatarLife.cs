@@ -93,6 +93,8 @@ public class avatarLife : MonoBehaviour
 
     public void Death()
     {
+        GetComponent<avatarController>().moveEnable = false;
+        GetComponent<avatarController>().StopAllAnim();
         StartCoroutine(BlinkWhite(true));
     }
 
@@ -108,6 +110,7 @@ public class avatarLife : MonoBehaviour
         GetComponent<Animator>().SetLayerWeight(2, 0);
 
         GetComponent<Inventory>().EmptyCollected();
+        GetComponent<avatarController>().moveEnable = true;
     }
 
     public IEnumerator BlinkWhite(bool isDead)

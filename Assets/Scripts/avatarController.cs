@@ -9,6 +9,8 @@ public class avatarController : MonoBehaviour
     public float defaultX = 0f;
     public float defaultY = 1.5f;
 
+    public bool moveEnable = true;
+
     private bool jumpAbility = true;
     private Rigidbody2D rigidbody;
     private avatarLife avatarLife;
@@ -67,9 +69,18 @@ public class avatarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement();
-        jump();
-        inventoryManager();
+        if(moveEnable)
+        {
+            movement();
+            jump();
+            inventoryManager();
+        }
+    }
+
+    public void StopAllAnim()
+    {
+        GetComponent<Animator>().SetBool("IsWalk", false);
+        GetComponent<Animator>().SetBool("Jump", false);
     }
 
     void movement()
