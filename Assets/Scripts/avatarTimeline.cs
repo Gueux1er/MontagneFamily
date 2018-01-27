@@ -19,6 +19,7 @@ public class avatarTimeline : MonoBehaviour {
     bool timed;
 
     FMOD.Studio.EventInstance essouflement; //Instanciation du son
+    bool playingEssouflement = false;
     FMOD.Studio.EventInstance mortVieillissement; //Instanciation du son
 
     // Use this for initialization
@@ -35,23 +36,28 @@ public class avatarTimeline : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         currentTime += Time.deltaTime;
-        if((int)currentTime == 0.3* lifeExpectancy)
+        if((int)currentTime == 0.3* lifeExpectancy && age != AvatarAge.ADULT)
         {
             age = AvatarAge.ADULT;
             avatarController.setAgePourCollectible(1.0f);
+            avatarController.setAgePourSaut(1.0f);
             timed = true;
 
-        } else if ((int)currentTime == 0.7* lifeExpectancy)
+        } else if ((int)currentTime == 0.7* lifeExpectancy && age != AvatarAge.OLD)
         {
             age = AvatarAge.OLD;
             avatarController.setAgePourCollectible(2.0f);
+            avatarController.setAgePourSaut(2.0f);
             timed = true;
 
-        } else if ((int)currentTime == lifeExpectancy - 16) //L'avatar n'a plus que 16 secondes à vivre
-        {
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Essouflement"); // Jouer un son une fois
 
-        } else if((int)currentTime == lifeExpectancy)
+        } else if ((int)currentTime == lifeExpectancy - 16 && !playingEssouflement) 
+        {
+            //L'avatar n'a plus que 16 secondes à vivre
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Essouflement"); // Jouer un son une fois
+            playingEssouflement = true;
+
+        } else if((int)currentTime == lifeExpectancy && age != AvatarAge.DEAD)
         {
             // TODO : death
             age = AvatarAge.DEAD;

@@ -14,8 +14,13 @@ public class avatarController : MonoBehaviour
 
     private Inventory inventory;
 
+    //*** Sons ***//
+
     FMOD.Studio.EventInstance collectible; //Instanciation du son
     FMOD.Studio.ParameterInstance agePourCollectible; //Instanciation du paramètre lié au son
+
+    FMOD.Studio.EventInstance saut; //Instanciation du son
+    FMOD.Studio.ParameterInstance agePourSaut; //Instanciation du paramètre lié au son
 
 
     // Use this for initialization
@@ -25,11 +30,15 @@ public class avatarController : MonoBehaviour
         inventory = GetComponent<Inventory>();
         avatarLife = GetComponent<avatarLife>();
 
+        //*** Sons ***//
+
         collectible = FMODUnity.RuntimeManager.CreateInstance("event:/Avatar/Collectible"); // Chemin du son 
         collectible.getParameter("Age", out agePourCollectible); // Va chercher le paramètre FMOD "Age" et le stocke dans le paramètre "agePourCollectible".
         agePourCollectible.setValue(0.0f); // Valeur du paramètre en début de partie
 
-
+        saut = FMODUnity.RuntimeManager.CreateInstance("event:/Avatar/Saut"); // Chemin du son 
+        saut.getParameter("Age", out agePourSaut); // Va chercher le paramètre FMOD "Age" et le stocke dans le paramètre "agePourSaut".
+        agePourSaut.setValue(0.0f); // Valeur du paramètre en début de partie
     }
 
     // Update is called once per frame
@@ -52,6 +61,7 @@ public class avatarController : MonoBehaviour
             rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             maximumJumpY = rigidbody.position.y;
             jumpAbility = false;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Saut"); // Joue le son une fois
         }
         if(!jumpAbility)
         {
@@ -65,6 +75,11 @@ public class avatarController : MonoBehaviour
     public void setAgePourCollectible(float value)
     {
         agePourCollectible.setValue(value);
+    }
+
+    public void setAgePourSaut(float value)
+    {
+        agePourSaut.setValue(value);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
