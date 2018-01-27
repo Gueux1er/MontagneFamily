@@ -21,10 +21,11 @@ GameObject:
   - component: {fileID: 4843228783347310}
   - component: {fileID: 212915044437179618}
   - component: {fileID: 251836517877767516}
-  - component: {fileID: 68514813074138790}
+  - component: {fileID: 61575524257317022}
+  - component: {fileID: 114047001619514442}
   m_Layer: 0
   m_Name: platform_pf
-  m_TagString: Untagged
+  m_TagString: Plateform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,14 +37,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1389769113868230}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5624375, y: -3.9323084, z: 0.044921875}
+  m_LocalPosition: {x: -7.3976, y: -1.6923, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &68514813074138790
-EdgeCollider2D:
+--- !u!61 &61575524257317022
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -52,13 +53,52 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.16}
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.32}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.32, y: 0.32}
   m_EdgeRadius: 0
-  m_Points:
-  - {x: -1.62, y: 0}
-  - {x: 1.62, y: 0}
+--- !u!114 &114047001619514442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1389769113868230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6d1cd532b90c4044865656621dc1e8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spritePlatform0:
+  - {fileID: 21300002, guid: cb42711ed37cb2a43bceb135118e1445, type: 3}
+  - {fileID: 21300012, guid: cb42711ed37cb2a43bceb135118e1445, type: 3}
+  - {fileID: 21300022, guid: cb42711ed37cb2a43bceb135118e1445, type: 3}
+  - {fileID: 21300010, guid: cb42711ed37cb2a43bceb135118e1445, type: 3}
+  - {fileID: 21300014, guid: cb42711ed37cb2a43bceb135118e1445, type: 3}
+  - {fileID: 21300004, guid: cb42711ed37cb2a43bceb135118e1445, type: 3}
+  - {fileID: 21300000, guid: cb42711ed37cb2a43bceb135118e1445, type: 3}
+  - {fileID: 21300020, guid: cb42711ed37cb2a43bceb135118e1445, type: 3}
+  - {fileID: 21300024, guid: cb42711ed37cb2a43bceb135118e1445, type: 3}
+  spritePlatform1: []
+  spritePlatform2: []
+  spritePlatform3: []
+  prefabGround: {fileID: 0}
+  spriteGround0: []
+  spriteGround1: []
+  isUp: 0
+  isDown: 0
+  isLeft: 0
+  isRight: 0
 --- !u!212 &212915044437179618
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -93,7 +133,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300002, guid: cb42711ed37cb2a43bceb135118e1445, type: 3}
+  m_Sprite: {fileID: 21300012, guid: cb42711ed37cb2a43bceb135118e1445, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -117,7 +157,7 @@ PlatformEffector2D:
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
+  m_SurfaceArc: 179.65
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
