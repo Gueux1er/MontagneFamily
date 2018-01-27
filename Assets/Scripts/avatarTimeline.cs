@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class avatarTimeline : MonoBehaviour {
 
+    public enum AvatarAge { YOUNG, ADULT, OLD, DEAD};
+    private AvatarAge age;
     public float currentTime;
     public Slider timeSlider;
     public Image timedImage;
@@ -20,20 +22,29 @@ public class avatarTimeline : MonoBehaviour {
 
         avatarController = GetComponent<avatarController>();
         currentTime = 0f; ;
-		
+        age = AvatarAge.YOUNG;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         currentTime += Time.deltaTime;
-        if (((int)currentTime) == 70 || ((int)currentTime) == 30)
+        if((int)currentTime == 3)
         {
+            age = AvatarAge.ADULT;
+            avatarController.setAgePourCollectible(1.0f);
+            timed = true;
+
+        } else if ((int)currentTime == 7){
+            age = AvatarAge.OLD;
+            avatarController.setAgePourCollectible(2.0f);
             timed = true;
         }
+
 
         if(currentTime <= 0)
         {
             // TODO : death
+            age = AvatarAge.DEAD;
         }
 
         if (timed)

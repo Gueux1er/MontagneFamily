@@ -14,6 +14,9 @@ public class avatarController : MonoBehaviour
 
     private Inventory inventory;
 
+    FMOD.Studio.EventInstance collectible; //Instanciation du son
+    FMOD.Studio.ParameterInstance agePourCollectible; //Instanciation du paramètre lié au son
+
 
     // Use this for initialization
     void Start()
@@ -21,6 +24,11 @@ public class avatarController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         inventory = GetComponent<Inventory>();
         avatarLife = GetComponent<avatarLife>();
+
+        collectible = FMODUnity.RuntimeManager.CreateInstance("event:/Avatar/Collectible"); // Chemin du son 
+        collectible.getParameter("Age", out agePourCollectible); // Va chercher le paramètre FMOD "Age" et le stocke dans le paramètre "agePourCollectible".
+        agePourCollectible.setValue(0.0f); // Valeur du paramètre en début de partie
+
 
     }
 
@@ -54,11 +62,17 @@ public class avatarController : MonoBehaviour
         }
     }
 
+    public void setAgePourCollectible(float value)
+    {
+        agePourCollectible.setValue(value);
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         //Collision Recoltable
         if (collision.gameObject.tag == "Recoltable")
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Collectible"); // Joue le son une fois
             ItemController item = collision.gameObject.GetComponent<ItemController>();
             item.ApplyEffect(gameObject);
        
