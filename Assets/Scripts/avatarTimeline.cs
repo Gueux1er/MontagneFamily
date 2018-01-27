@@ -52,14 +52,14 @@ public class avatarTimeline : MonoBehaviour {
         } else if ((int)currentTime == lifeExpectancy - 16 && !playingEssouflement) 
         {
             //L'avatar n'a plus que 16 secondes à vivre
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Essouflement"); // Jouer un son une fois
+            essouflement.start(); // Jouer un son une fois
             playingEssouflement = true;
 
         } else if((int)currentTime == lifeExpectancy && age != AvatarAge.DEAD)
         {
             // TODO : death
             age = AvatarAge.DEAD;
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Mort_Vieillissement"); // Jouer un son une fois
+            mortVieillissement.start(); // Jouer un son une fois
         }
 
         if (timed)
