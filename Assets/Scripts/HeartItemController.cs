@@ -31,7 +31,8 @@ public class HeartItemController : ItemController {
 
     public override void take(GameObject gameObject)
     {
-        ApplyEffect(gameObject);
+        gameObjectTaken = gameObject;
+        ApplyEffect();
         heart.SetActive(false);
         plant.GetComponent<SpriteRenderer>().sprite = emptyPlantSprite;
         canBeTaken = false;
