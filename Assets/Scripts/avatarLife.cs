@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class avatarLife : MonoBehaviour
 {
-
+    private int cptTry = 1;
     public int startingLife = 5;
     public int maxLife = 5;
     public int currentLife;
@@ -111,6 +111,7 @@ public class avatarLife : MonoBehaviour
 
         GetComponent<Inventory>().EmptyCollected();
         GetComponent<avatarController>().moveEnable = true;
+        cptTry++;
     }
 
     public IEnumerator BlinkWhite(bool isDead)
