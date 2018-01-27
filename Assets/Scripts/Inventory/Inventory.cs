@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour {
 
-    public List<ItemController> items = new List<ItemController>();
+    public List<ItemController> collectedItems = new List<ItemController>();
+    public List<ItemController> savedItems = new List<ItemController>();
 
     public GameObject pf_imgInventory;
     public GameObject pf_bgInventory;
@@ -51,16 +52,14 @@ public class Inventory : MonoBehaviour {
         //Add the object to UI
         GameObject tmp = Instantiate(pf_imgInventory, InventoryContainerUI);
         tmp.GetComponent<Image>().sprite = item.image.sprite;
-
-        // Add in inventory list
-        items.Add(item);
+        collectedItems.Add(item);
         updateBackground();
     }
 
     public void RemoveItem(ItemController item)
     {
-        InventoryContainerUI.GetChild(items.IndexOf(item)).parent = null;
-        items.Remove(item);
+        InventoryContainerUI.GetChild(collectedItems.IndexOf(item)).parent = null;
+        collectedItems.Remove(item);
         updateBackground();
     }
 
@@ -82,7 +81,7 @@ public class Inventory : MonoBehaviour {
 
     private void updateBackground()
     {
-        int nbItems = items.Count;
+        int nbItems = collectedItems.Count;
         GameObject tmp;
         InventoryBgContainerUI.DetachChildren();
 
@@ -109,4 +108,17 @@ public class Inventory : MonoBehaviour {
             tmp.GetComponent<Image>().sprite = lastBgInventory;
         }
     }
+
+    public void SaveItems()
+    {
+        print("save items");
+        foreach(ItemController item in collectedItems)
+        {
+            savedItems.Add(item);
+        }
+        InventoryContainerUI.DetachChildren();
+        collectedItems = new List<ItemController>();
+        updateBackground();
+    }
+
 }

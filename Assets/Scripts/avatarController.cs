@@ -173,6 +173,14 @@ public class avatarController : MonoBehaviour
 
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Checkpoint")
+        {
+            inventory.SaveItems();
+        }
+    }
+
     public void setAllAgePourAudio(float value)
     {
         agePourCollectible.setValue(value);
