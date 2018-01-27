@@ -176,7 +176,7 @@ Animator:
   m_GameObject: {fileID: 1922525768687750}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a1c492146e6e26645871a26092f23d76, type: 2}
+  m_Controller: {fileID: 9100000, guid: 14a46731e3e8b7d4abb66377e1471e77, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -202,8 +202,8 @@ MonoBehaviour:
   flashSpeed: 5
   damagedColour: {r: 1, g: 0, b: 0, a: 0.3}
   healedColour: {r: 0, g: 1, b: 0, a: 0.3}
-  heartFull: {fileID: 21300000, guid: 8171b1d12f6795841af477dc5e0ab9f4, type: 3}
-  heartEmpty: {fileID: 21300004, guid: 8171b1d12f6795841af477dc5e0ab9f4, type: 3}
+  heartFull: {fileID: 21300008, guid: 1e8fe626ef24ad74a9c93c1ccf7d01b8, type: 3}
+  heartEmpty: {fileID: 21300010, guid: 1e8fe626ef24ad74a9c93c1ccf7d01b8, type: 3}
   hearts:
   - {fileID: 0}
   - {fileID: 0}
@@ -243,6 +243,7 @@ MonoBehaviour:
   jumpForce: 15
   defaultX: 0
   defaultY: 5
+  moveEnable: 1
 --- !u!114 &114486262837141734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -259,7 +260,7 @@ MonoBehaviour:
   timeSlider: {fileID: 0}
   timedImage: {fileID: 0}
   flashSpeed: 5
-  flashColour: {r: 1, g: 0, b: 0, a: 0.3}
+  ratioTime: 1
 --- !u!124 &124504251495313072
 Behaviour:
   m_ObjectHideFlags: 1

@@ -50,7 +50,7 @@ public class avatarTimeline : MonoBehaviour {
             timed = true;
             GetComponent<Animator>().SetLayerWeight(2, 1);
 
-        } else if ((int)currentTime == lifeExpectancy - 16 && !playingEssouflement) 
+        } else if ((int)currentTime == lifeExpectancy - 5 && !playingEssouflement) 
         {
             //L'avatar n'a plus que 16 secondes à vivre
             essouflement.start(); // Jouer un son une fois
