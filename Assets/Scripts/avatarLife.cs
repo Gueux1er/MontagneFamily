@@ -48,8 +48,6 @@ public class avatarLife : MonoBehaviour
         {
             lifeImageEvnt.color = Color.Lerp(lifeImageEvnt.color, Color.clear, flashSpeed * Time.deltaTime);
         }
-        currentLife = 3;
-        UpdateHearts();
         damaged = false;
         healed = false;
     }
@@ -61,6 +59,7 @@ public class avatarLife : MonoBehaviour
 
         if(currentLife <= 0)
         {
+            currentLife = 0;
             // TODO : death
         }
 
@@ -85,12 +84,10 @@ public class avatarLife : MonoBehaviour
 
         for(int i=0; i<maxLife-currentLife; i++)
         {
-            // TODO : set with correct empty heart image
             hearts[i].sprite = heartEmpty;
         }
         for(int i=maxLife-currentLife; i<maxLife; i++)
         {
-            // TODO : set with correct heart image
             hearts[i].sprite = heartFull;
         }
     }

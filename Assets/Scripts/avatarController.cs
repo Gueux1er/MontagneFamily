@@ -6,21 +6,21 @@ public class avatarController : MonoBehaviour
 {
     public float moveSpeed = 2;
     public float jumpForce = 20;
+
     private bool jumpAbility = true;
     private Rigidbody rigidbody;
+    private avatarLife avatarLife;
+    private float maximumJumpY;
 
     private Inventory inventory;
 
 
-    private void Awake()
-    {
-        rigidbody = GetComponent<Rigidbody>();
-        inventory = GetComponent<Inventory>();
-    }
-
     // Use this for initialization
     void Start()
     {
+        rigidbody = GetComponent<Rigidbody>();
+        inventory = GetComponent<Inventory>();
+        avatarLife = GetComponent<avatarLife>();
 
     }
 
@@ -42,24 +42,20 @@ public class avatarController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && jumpAbility)
         {
             rigidbody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+            maximumJumpY = rigidbody.position.y;
             jumpAbility = false;
         }
-    }
-
-    void OnCollisionStay(Collision collision)
-    {
-        //Collision Sol
-        if (collision.contacts[0].normal == Vector3.up && rigidbody.velocity.y == 0)
+        if(!jumpAbility)
         {
-            jumpAbility = true;
+            if(rigidbody.position.y > maximumJumpY)
+            {
+                maximumJumpY = rigidbody.position.y;
+            }
         }
-      
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        print("on collision enter");
-        print(collision.gameObject.name);
         //Collision Recoltable
         if (collision.gameObject.tag == "Recoltable")
         {
@@ -69,6 +65,24 @@ public class avatarController : MonoBehaviour
             inventory.GetItem(item);
             print("get an item !");
             Destroy(collision.gameObject);
+        } else if(collision.gameObject.tag == "Plateform")
+        {
+            float highFall = maximumJumpY - rigidbody.velocity.y;
+
+            if (highFall >= 6)
+            {
+                avatarLife.TakeDamage(5);
+            } else if (highFall >= 5)
+            {
+                avatarLife.TakeDamage(4);
+            } else if (highFall >= 4)
+            {
+                avatarLife.TakeDamage(2);
+            } else if (highFall >= 3)
+            {
+                avatarLife.TakeDamage(1);
+            }
+            jumpAbility = true;
         }
 
     }
