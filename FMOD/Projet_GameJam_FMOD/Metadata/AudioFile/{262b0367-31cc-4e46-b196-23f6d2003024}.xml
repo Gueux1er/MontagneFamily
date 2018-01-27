@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{262b0367-31cc-4e46-b196-23f6d2003024}">
+        <property name="assetPath">
+            <value>Marche_Roche_Vieux.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>4.2864625850340135</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{28dc0ef9-20ff-4117-932c-0069e6503045}</destination>
+        </relationship>
+    </object>
+</objects>
