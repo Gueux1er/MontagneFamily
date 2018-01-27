@@ -31,7 +31,6 @@ public class avatarLife : MonoBehaviour
 
         avatarController = GetComponent<avatarController>();
         currentLife = startingLife;
-
     }
 
     // Update is called once per frame
