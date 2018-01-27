@@ -17,6 +17,10 @@ public class avatarLife : MonoBehaviour
     public Sprite heartFull;
     public Sprite heartEmpty;
 
+    public GameObject pf_skeleton;
+    public int nbSkeleton = 3;
+    private Queue<GameObject> skeletons = new Queue<GameObject>();
+
     public Image[]  hearts;
 
 
@@ -108,8 +112,20 @@ public class avatarLife : MonoBehaviour
         }
     }
 
+    private void instantiateSkeleton(Vector2 position)
+    {
+        GameObject skeleton = Instantiate(pf_skeleton);
+        skeletons.Enqueue(skeleton);
+        if (skeletons.Count > nbSkeleton)
+        {
+            Destroy(skeletons.Dequeue());
+        }
+        skeleton.GetComponent<Rigidbody2D>().MovePosition(position);
+    }
+
     private void DeathReset()
     {
+        Vector2 position = gameObject.transform.position;
         // Reset position /life/etc
         GetComponent<avatarTimeline>().ResetTimeline();
         GetComponent<avatarController>().ResetPosition();
@@ -119,6 +135,8 @@ public class avatarLife : MonoBehaviour
         UpdateHearts();
         GetComponent<Animator>().SetLayerWeight(1, 0);
         GetComponent<Animator>().SetLayerWeight(2, 0);
+
+        instantiateSkeleton(position);
 
         GetComponent<Inventory>().EmptyCollected();
         GetComponent<Inventory>().AffectEffectSaved();

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a5c5699fcf49d854389645ad1f73bb8f
-timeCreated: 1517065529
+timeCreated: 1517094444
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -34,6 +34,7 @@ TextureImporter:
     21300054: tileset_avatar_27
     21300056: tileset_avatar_28
     21300058: tileset_avatar_29
+    21300060: tileset_avatar_30
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -525,6 +526,20 @@ TextureImporter:
         height: 36
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset_avatar_30
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 48
+        width: 23
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
