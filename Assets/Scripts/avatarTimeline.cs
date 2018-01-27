@@ -8,6 +8,7 @@ public class avatarTimeline : MonoBehaviour {
     public enum AvatarAge { YOUNG, ADULT, OLD, DEAD};
     private AvatarAge age;
     public float currentTime;
+    public float lifeExpectancy = 100f;
     public Slider timeSlider;
     public Image timedImage;
     public float flashSpeed = 5f;
@@ -17,31 +18,40 @@ public class avatarTimeline : MonoBehaviour {
     bool isDeadOld;
     bool timed;
 
-	// Use this for initialization
-	void Start () {
+    FMOD.Studio.EventInstance essouflement; //Instanciation du son
+
+    // Use this for initialization
+    void Start () {
 
         avatarController = GetComponent<avatarController>();
         currentTime = 0f; ;
         age = AvatarAge.YOUNG;
-	}
+
+        essouflement = FMODUnity.RuntimeManager.CreateInstance("event:/Avatar/Essouflement"); // Chemin du son 
+    }
 	
 	// Update is called once per frame
 	void Update () {
         currentTime += Time.deltaTime;
-        if((int)currentTime == 3)
+        if((int)currentTime == 0.3* lifeExpectancy)
         {
             age = AvatarAge.ADULT;
             avatarController.setAgePourCollectible(1.0f);
             timed = true;
 
-        } else if ((int)currentTime == 7){
+        } else if ((int)currentTime == 0.7* lifeExpectancy)
+        {
             age = AvatarAge.OLD;
             avatarController.setAgePourCollectible(2.0f);
             timed = true;
+
+        } else if ((int)currentTime == lifeExpectancy - 16) //L'avatar n'a plus que 16 secondes à vivre
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Essouflement"); // Jouer un son une fois
         }
 
 
-        if(currentTime <= 0)
+        else if(currentTime >= lifeExpectancy)
         {
             // TODO : death
             age = AvatarAge.DEAD;
