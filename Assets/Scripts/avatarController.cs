@@ -28,6 +28,9 @@ public class avatarController : MonoBehaviour
     FMOD.Studio.EventInstance receptionTropHaut;
     FMOD.Studio.ParameterInstance agePourReceptionTropHaut;
 
+    FMOD.Studio.EventInstance mortAplati;
+    FMOD.Studio.ParameterInstance agePourMortAplati;
+
 
     // Use this for initialization
     void Start()
@@ -53,6 +56,10 @@ public class avatarController : MonoBehaviour
         receptionTropHaut = FMODUnity.RuntimeManager.CreateInstance("event:/Avatar/Reception_Trop_Haut");
         receptionTropHaut.getParameter("Age", out agePourReceptionTropHaut);
         agePourReceptionTropHaut.setValue(0.0f);
+
+        mortAplati = FMODUnity.RuntimeManager.CreateInstance("event:/Avatar/Mort_Aplati");
+        mortAplati.getParameter("Age", out agePourMortAplati);
+        agePourMortAplati.setValue(0.0f);
     }
 
     // Update is called once per frame
@@ -121,13 +128,21 @@ public class avatarController : MonoBehaviour
             if (!jumpAbility)
             {
                 jumpAbility = true;
-            
-                if(highFall < 3)
+
+                if (highFall < 3)
                 {
                     FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Reception"); // Joue le son une fois
-                } else if(avatarLife.currentLife > 0)
+
+                }
+                else
                 {
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Reception_Trop_Haut");
+                    if (avatarLife.currentLife > 0)
+                    {
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Reception_Trop_Haut");
+                    } else
+                    {
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Mort_Aplati");
+                    }
                 }
                 
             }
@@ -142,6 +157,7 @@ public class avatarController : MonoBehaviour
         agePourSaut.setValue(value);
         agePourReception.setValue(value);
         agePourReceptionTropHaut.setValue(value);
+        agePourMortAplati.setValue(value);
     }
 
 }
