@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class avatarLife : MonoBehaviour
 {
-    private int cptTry = 1;
+    public int cptTry = 1;
     public int startingLife = 5;
     public int maxLife = 5;
     public int currentLife;
@@ -96,6 +96,16 @@ public class avatarLife : MonoBehaviour
         GetComponent<avatarController>().moveEnable = false;
         GetComponent<avatarController>().StopAllAnim();
         StartCoroutine(BlinkWhite(true));
+
+        // Evolution for all game objects
+        GameObject[] tabGo = GameObject.FindGameObjectsWithTag("Recoltable");
+        for(int i=0; i<tabGo.Length; i++)
+        {
+            if(tabGo[i].GetComponent<ItemController>().isEvolutive)
+            {
+                //tabGo[i].GetComponent<ItemController>().
+            }
+        }
     }
 
     private void DeathReset()
