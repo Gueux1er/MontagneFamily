@@ -111,18 +111,24 @@ public class avatarController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
+        print("test");
         //Collision Recoltable
         if (collision.gameObject.tag == "Recoltable")
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/Avatar/Collectible"); // Joue le son une fois
             ItemController item = collision.gameObject.GetComponent<ItemController>();
             item.ApplyEffect(gameObject);
-       
+
             inventory.GetItem(item);
             Destroy(collision.gameObject);
-        } else if(collision.gameObject.tag == "Plateform")
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Plateform")
         {
 
             float highFall = maximumJumpY - rigidbody.position.y;
