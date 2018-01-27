@@ -43,16 +43,16 @@ public class avatarTimeline : MonoBehaviour {
             timed = true;
             GetComponent<Animator>().SetLayerWeight(1, 1);
 
-        } else if ((int)currentTime == 0.7* lifeExpectancy && age != AvatarAge.OLD)
+        } else if ((int)currentTime == 0.8* lifeExpectancy && age != AvatarAge.OLD)
         {
             age = AvatarAge.OLD;
             avatarController.setAllAgePourAudio(2.0f);
             timed = true;
             GetComponent<Animator>().SetLayerWeight(2, 1);
 
-        } else if ((int)currentTime == lifeExpectancy - 16 && !playingEssouflement) 
+        } else if ((int)currentTime == lifeExpectancy - 5 && !playingEssouflement) 
         {
-            //L'avatar n'a plus que 16 secondes à vivre
+            //L'avatar n'a plus que 5 secondes à vivre
             essouflement.start(); // Jouer un son une fois
             playingEssouflement = true;
 

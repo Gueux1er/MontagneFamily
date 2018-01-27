@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class avatarLife : MonoBehaviour
 {
-    private int cptTry = 1;
+    public int cptTry = 1;
     public int startingLife = 5;
     public int maxLife = 5;
     public int currentLife;
@@ -16,6 +16,10 @@ public class avatarLife : MonoBehaviour
 
     public Sprite heartFull;
     public Sprite heartEmpty;
+
+    public GameObject pf_skeleton;
+    public int nbSkeleton = 3;
+    private Queue<GameObject> skeletons = new Queue<GameObject>();
 
     public Image[]  hearts;
 
@@ -96,20 +100,46 @@ public class avatarLife : MonoBehaviour
         GetComponent<avatarController>().moveEnable = false;
         GetComponent<avatarController>().StopAllAnim();
         StartCoroutine(BlinkWhite(true));
+
+        // Evolution for all game objects
+        GameObject[] tabGo = GameObject.FindGameObjectsWithTag("Recoltable");
+        for(int i=0; i<tabGo.Length; i++)
+        {
+            if(tabGo[i].GetComponent<ItemController>().isEvolutive)
+            {
+                tabGo[i].GetComponent<ItemController>().NextGeneration();
+            }
+        }
+    }
+
+    private void instantiateSkeleton(Vector2 position)
+    {
+        GameObject skeleton = Instantiate(pf_skeleton);
+        skeletons.Enqueue(skeleton);
+        if (skeletons.Count > nbSkeleton)
+        {
+            Destroy(skeletons.Dequeue());
+        }
+        skeleton.GetComponent<Rigidbody2D>().MovePosition(position);
     }
 
     private void DeathReset()
     {
+        Vector2 position = gameObject.transform.position;
         // Reset position /life/etc
         GetComponent<avatarTimeline>().ResetTimeline();
         GetComponent<avatarController>().ResetPosition();
+        GetComponent<avatarController>().ResetStats();
         GetComponent<avatarController>().setAllAgePourAudio(0.0f);
         currentLife = startingLife;
         UpdateHearts();
         GetComponent<Animator>().SetLayerWeight(1, 0);
         GetComponent<Animator>().SetLayerWeight(2, 0);
 
+        instantiateSkeleton(position);
+
         GetComponent<Inventory>().EmptyCollected();
+        GetComponent<Inventory>().AffectEffectSaved();
         GetComponent<avatarController>().moveEnable = true;
         cptTry++;
     }

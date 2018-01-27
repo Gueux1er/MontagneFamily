@@ -29,6 +29,7 @@ public class Inventory : MonoBehaviour {
         InventoryClosedContainerUI.gameObject.SetActive(false);
 
         closedBgInventory = Resources.Load<Sprite>("images/closedBgInventory");
+        ToggleVisibility();
     }
 
     // Update is called once per frame
@@ -52,7 +53,7 @@ public class Inventory : MonoBehaviour {
 
     public void ToggleVisibility()
     {
-        if(InventoryContainerUI.gameObject.activeSelf)
+        if(InventoryContainerUI.gameObject.activeSelf || collectedItems.Count + savedItems.Count == 0)
         {
             InventoryContainerUI.gameObject.SetActive(false);
             InventoryBgContainerUI.gameObject.SetActive(false);
@@ -117,6 +118,14 @@ public class Inventory : MonoBehaviour {
         collectedItems.Clear();
 
         updateDisplay();
+    }
+
+    public void AffectEffectSaved()
+    {
+        for(int i=0; i<savedItems.Count; i++)
+        {
+            savedItems[i].ApplyEffect();
+        }
     }
 
     public void DestroyAllChildren(Transform t)

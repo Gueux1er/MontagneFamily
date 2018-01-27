@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class avatarController : MonoBehaviour
 {
-    public float moveSpeed = 2;
-    public float jumpForce = 20;
+    public float moveSpeed;
+    private float defaultMovespeed = 8;
+    public float fallBonus = 0;
+    public float jumpForce;
+    private float defaultJumpForce = 15;
     public float defaultX = 0f;
     public float defaultY = 1.5f;
 
@@ -39,6 +42,9 @@ public class avatarController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        moveSpeed = defaultMovespeed;
+        jumpForce = defaultJumpForce;
+
         rigidbody = GetComponent<Rigidbody2D>();
         inventory = GetComponent<Inventory>();
         avatarLife = GetComponent<avatarLife>();
@@ -80,7 +86,7 @@ public class avatarController : MonoBehaviour
     public void StopAllAnim()
     {
         GetComponent<Animator>().SetBool("IsWalk", false);
-        GetComponent<Animator>().SetBool("Jump", false);
+        GetComponent<Animator>().SetBool("IsJump", false);
     }
 
     void movement()
@@ -139,16 +145,16 @@ public class avatarController : MonoBehaviour
 
             float highFall = maximumJumpY - rigidbody.position.y;
 
-            if (highFall >= 12)
+            if (highFall >= 12 + fallBonus*3)
             {
                 avatarLife.TakeDamage(5);
-            } else if (highFall >= 11)
+            } else if (highFall >= 11 + fallBonus * 3)
             {
                 avatarLife.TakeDamage(4);
-            } else if (highFall >= 9)
+            } else if (highFall >= 9 + fallBonus *2)
             {
                 avatarLife.TakeDamage(2);
-            } else if (highFall >= 7)
+            } else if (highFall >= 7 + fallBonus)
             {
                 avatarLife.TakeDamage(1);
             }
@@ -181,13 +187,14 @@ public class avatarController : MonoBehaviour
         //Collision Recoltable
         if (other.gameObject.tag == "Recoltable")
         {
-            collectible.start(); // Joue le son une fois
             ItemController item = other.gameObject.GetComponent<ItemController>();
-            
-            item.take(gameObject);
-         
-            //other.gameObject.SetActive(false);
-            //Destroy(other.gameObject);
+            if(item.canBeTaken)
+            {
+
+                item.take(gameObject);
+
+                collectible.start(); // Joue le son une fois
+            }
         }
     }
 
@@ -204,6 +211,14 @@ public class avatarController : MonoBehaviour
     {
         rigidbody.velocity = new Vector2(0,0);
         rigidbody.MovePosition(new Vector2(defaultX, defaultY));
+    }
+
+    public void ResetStats()
+    {
+        moveSpeed = defaultMovespeed;
+        fallBonus = 0;
+        jumpForce = defaultJumpForce;
+        GetComponent<avatarTimeline>().ratioTime = 1;
     }
 
 }

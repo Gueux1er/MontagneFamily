@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Potion : Stuff
+public class Shoes : Stuff
 {
 
     public override void ApplyEffect(GameObject gameObject)
     {
-        gameObject.GetComponent<avatarTimeline>().ratioTime *= 0.7f;
+        gameObject.GetComponent<avatarController>().moveSpeed += 3;
     }
 }

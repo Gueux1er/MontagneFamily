@@ -5,11 +5,14 @@ using UnityEngine;
 public class ItemController : MonoBehaviour
 {
 
-    public enum ItemType { POTION, HEART }
+    public enum ItemType { POTION, HEART, SHOES, SPRING }
     public ItemType type;
     protected Stuff stuff;
+    public bool canBeTaken;
+    public bool isEvolutive;
     public float initX;
     public float initY;
+    protected GameObject gameObjectTaken;
 
     protected SpriteRenderer imageRenderer;
 
@@ -24,6 +27,8 @@ public class ItemController : MonoBehaviour
         imageRenderer = GetComponent<SpriteRenderer>();
         InitType();
         InitPosition();
+
+        canBeTaken = true;
     }
 
     // Update is called once per frame
@@ -34,14 +39,15 @@ public class ItemController : MonoBehaviour
 
     public virtual void take(GameObject other)
     {
-        other.GetComponent<Inventory>().GetItem(this);
-        ApplyEffect(other);
+        gameObjectTaken = other;
+        gameObjectTaken.GetComponent<Inventory>().GetItem(this);
+        ApplyEffect();
         gameObject.SetActive(false);
     }
 
-    public void ApplyEffect(GameObject gameObject)
+    public void ApplyEffect()
     {
-        stuff.ApplyEffect(gameObject);
+        stuff.ApplyEffect(gameObjectTaken);
     }
 
     private void InitType()
@@ -49,12 +55,27 @@ public class ItemController : MonoBehaviour
         switch (type)
         {
             case ItemType.POTION:
+                isEvolutive = false;
                 stuff = new Potion();
                 break;
             case ItemType.HEART:
+                isEvolutive = true;
                 stuff = new Heart();
                 break;
+            case ItemType.SHOES:
+                isEvolutive = false;
+                stuff = new Shoes();
+                break;
+            case ItemType.SPRING:
+                isEvolutive = false;
+                stuff = new Spring();
+                break;
         }
+    }
+
+    public virtual void NextGeneration()
+    {
+        // for heritage
     }
 
     public void InitPosition()
