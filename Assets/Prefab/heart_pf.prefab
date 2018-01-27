@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4761794609714720}
   - component: {fileID: 61535983856324020}
-  - component: {fileID: 114917423598381494}
+  - component: {fileID: 114120441858846488}
   m_Layer: 0
   m_Name: heart_pf
   m_TagString: Recoltable
@@ -126,7 +126,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1575652, y: 0.18634927}
   m_EdgeRadius: 0
---- !u!114 &114917423598381494
+--- !u!114 &114120441858846488
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -134,15 +134,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1066783430555854}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d8344e508a5bd147878c886ba4e5c29, type: 3}
+  m_Script: {fileID: 11500000, guid: 5719c9b137b6e6443833068232f61c49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  type: 0
   initX: 0
   initY: 0
   heart: {fileID: 1457036373484438}
   plant: {fileID: 1835204908524310}
-  emptyPlantSprite: {fileID: 21300012, guid: 98e1510c0d8c16648ac7c6aba1d1e1b7, type: 3}
+  emptyPlantSprite: {fileID: 21300012, guid: 1e8fe626ef24ad74a9c93c1ccf7d01b8, type: 3}
 --- !u!212 &212269036742987386
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -177,7 +177,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300014, guid: 98e1510c0d8c16648ac7c6aba1d1e1b7, type: 3}
+  m_Sprite: {fileID: 21300014, guid: 1e8fe626ef24ad74a9c93c1ccf7d01b8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -221,7 +221,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300006, guid: 98e1510c0d8c16648ac7c6aba1d1e1b7, type: 3}
+  m_Sprite: {fileID: 21300006, guid: 1e8fe626ef24ad74a9c93c1ccf7d01b8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
