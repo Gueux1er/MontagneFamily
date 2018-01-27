@@ -6,6 +6,8 @@ public class avatarController : MonoBehaviour
 {
     public float moveSpeed = 2;
     public float jumpForce = 20;
+    public float defaultX = 0f;
+    public float defaultY = 1.5f;
 
     private bool jumpAbility = true;
     private Rigidbody2D rigidbody;
@@ -103,11 +105,12 @@ public class avatarController : MonoBehaviour
         {
             // QUand on est au sol, on reset la position du maxjump
             maximumJumpY = rigidbody.position.y; ;
+            jumpAbility = true;
         }
-        if(rigidbody.velocity.y < 0)
+        if (rigidbody.velocity.y < 0)
         {
             // Pour empecher de faire un saut dans le vide, si on est tombé en se lancant glisser
-            //jumpAbility = false;
+            jumpAbility = false;
         }
     }
 
@@ -146,9 +149,7 @@ public class avatarController : MonoBehaviour
                 }
             }
 
-
             jumpAbility = true;
-            
             
         }
 
@@ -180,6 +181,12 @@ public class avatarController : MonoBehaviour
         agePourReception.setValue(value);
         agePourReceptionTropHaut.setValue(value);
         agePourMortAplati.setValue(value);
+    }
+
+    public void ResetPosition()
+    {
+        rigidbody.velocity = new Vector2(0,0);
+        rigidbody.MovePosition(new Vector2(defaultX, defaultY));
     }
 
 }

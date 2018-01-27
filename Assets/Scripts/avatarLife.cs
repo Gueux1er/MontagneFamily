@@ -59,7 +59,7 @@ public class avatarLife : MonoBehaviour
         if(currentLife <= 0)
         {
             currentLife = 0;
-            // TODO : death
+            Death();
         }
 
         UpdateHearts();
@@ -89,5 +89,30 @@ public class avatarLife : MonoBehaviour
         {
             hearts[i].sprite = heartFull;
         }
+    }
+
+    private void DeathFu()
+    {
+        //TODO animation
+        print("animation");
+
+        // Reset position /life/etc
+        StartCoroutine(BlinkWhite());
+        GetComponent<avatarController>().ResetPosition();
+        currentLife = startingLife;
+        UpdateHearts();
+    }
+
+    IEnumerator BlinkWhite()
+    {
+        Rigidbody2D avatar_rigidbody = GetComponent<Rigidbody2D>();
+
+        for (int i =0; i<3; i++)
+        {
+
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        yield break;
     }
 }
