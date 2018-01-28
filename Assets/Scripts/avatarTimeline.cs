@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class avatarTimeline : MonoBehaviour {
 
-    public enum AvatarAge { YOUNG, ADULT, OLD, DEAD};
+    public enum AvatarAge {YOUNG, ADULT, OLD, DEAD};
     private AvatarAge age;
     public Collider2D[] colliderObjectsAge;
     public float currentTime;
