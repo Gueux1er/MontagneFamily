@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a5c5699fcf49d854389645ad1f73bb8f
-timeCreated: 1517100367
+timeCreated: 1517146046
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -36,6 +36,10 @@ TextureImporter:
     21300058: tileset_avatar_29
     21300060: tileset_avatar_30
     21300062: tileset_avatar_31
+    21300064: tileset_avatar_32
+    21300066: tileset_avatar_33
+    21300068: tileset_avatar_34
+    21300070: tileset_avatar_35
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -555,6 +559,62 @@ TextureImporter:
         height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset_avatar_32
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 32
+        width: 16
+        height: 34
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset_avatar_33
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 32
+        width: 22
+        height: 31
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset_avatar_34
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 30
+        height: 25
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset_avatar_35
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 31
+        height: 22
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
