@@ -109,6 +109,9 @@
         </relationship>
     </object>
     <object class="EventMixerMaster" id="{73e774d5-35c1-431f-8801-02297788371d}">
+        <property name="volume">
+            <value>10</value>
+        </property>
         <relationship name="effectChain">
             <destination>{5e2270b4-11ae-49fa-8fc5-c64527f88fac}</destination>
         </relationship>
@@ -333,7 +336,7 @@
             <value>0</value>
         </property>
         <property name="value">
-            <value>3.81469727e-06</value>
+            <value>3</value>
         </property>
     </object>
     <object class="AutomationPoint" id="{be47fb70-a0aa-4c9b-81ed-50a617a55204}">
@@ -341,7 +344,7 @@
             <value>0.80000000000000004</value>
         </property>
         <property name="value">
-            <value>-80</value>
+            <value>-60</value>
         </property>
     </object>
     <object class="AutomationPoint" id="{b0fea87a-1bfc-468b-aaf9-df4fbd47376c}">
@@ -349,7 +352,7 @@
             <value>0.69999999999999996</value>
         </property>
         <property name="value">
-            <value>0</value>
+            <value>2.99999619</value>
         </property>
     </object>
     <object class="AutomationPoint" id="{817cd2e2-fccc-4fa9-87a5-a5308f9fdf2c}">
@@ -357,7 +360,7 @@
             <value>0.80000000000000004</value>
         </property>
         <property name="value">
-            <value>3.81469727e-06</value>
+            <value>3</value>
         </property>
     </object>
     <object class="AutomationPoint" id="{f9d54ce5-7862-439f-b9c8-32556805f96f}">
@@ -365,7 +368,7 @@
             <value>0.69999999999999996</value>
         </property>
         <property name="value">
-            <value>-80</value>
+            <value>-60.0000267</value>
         </property>
     </object>
     <object class="AutomationPoint" id="{9de7a883-96f7-45cc-89f8-a930a23c7ed3}">
@@ -373,7 +376,7 @@
             <value>1.2</value>
         </property>
         <property name="value">
-            <value>3.81469727e-06</value>
+            <value>3</value>
         </property>
     </object>
     <object class="AutomationPoint" id="{91ef1452-2010-4d3c-8a93-a4c256cc5a8a}">
@@ -381,7 +384,7 @@
             <value>1.3</value>
         </property>
         <property name="value">
-            <value>-80</value>
+            <value>-60.0000267</value>
         </property>
     </object>
     <object class="AutomationPoint" id="{650ae422-20b1-49b5-ac43-6ec37de947d5}">
@@ -389,7 +392,7 @@
             <value>1.3</value>
         </property>
         <property name="value">
-            <value>0</value>
+            <value>3</value>
         </property>
     </object>
     <object class="AutomationPoint" id="{59e94ae2-a14d-43a0-a0b1-b8fbbb0c8877}">
@@ -397,7 +400,7 @@
             <value>1.2</value>
         </property>
         <property name="value">
-            <value>-80</value>
+            <value>-60</value>
         </property>
     </object>
 </objects>
