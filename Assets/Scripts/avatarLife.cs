@@ -129,7 +129,7 @@ public class avatarLife : MonoBehaviour
         {
             Destroy(skeletons.Dequeue());
         }
-        skeleton.transform.position = position;
+        skeleton.transform.position = new Vector2 (position.x, position.y + 0.5f);
     }
 
     private void DeathReset()
