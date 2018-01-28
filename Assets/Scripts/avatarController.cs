@@ -9,8 +9,7 @@ public class avatarController : MonoBehaviour
     public float fallBonus = 0;
     public float jumpForce;
     private float defaultJumpForce = 15;
-    private float defaultX;
-    private float defaultY;
+    private Vector2 originPosition;
 
     public bool moveEnable = true;
 
@@ -49,8 +48,7 @@ public class avatarController : MonoBehaviour
         inventory = GetComponent<Inventory>();
         avatarLife = GetComponent<avatarLife>();
 
-        defaultX = transform.position.x;
-        defaultY = transform.position.y;
+        originPosition = transform.position;
 
         //*** Sons ***//
 
@@ -233,7 +231,7 @@ public class avatarController : MonoBehaviour
     public void ResetPosition()
     {
         rigidbody.velocity = new Vector2(0,0);
-        rigidbody.MovePosition(new Vector2(defaultX, defaultY));
+        transform.position = originPosition;
     }
 
     public void ResetStats()
