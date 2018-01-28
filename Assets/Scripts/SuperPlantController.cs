@@ -17,6 +17,7 @@ public class SuperPlantController : MonoBehaviour {
             plants[i].SetActive(false);
         }
         plants[0].SetActive(true);
+        GrowUp();GrowUp();
 	}
 	
 	// Update is called once per frame

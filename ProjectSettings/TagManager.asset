@@ -8,6 +8,7 @@ TagManager:
   - Plateform
   - Checkpoint
   - Superplant
+  - SuperplantLast
   layers:
   - Default
   - TransparentFX
