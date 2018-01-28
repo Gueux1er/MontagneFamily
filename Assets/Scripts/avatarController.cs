@@ -175,6 +175,12 @@ public class avatarController : MonoBehaviour
             jumpAbility = true;
             
         }
+
+        else if (collision.gameObject.tag == "Plateform" && collision.contacts[0].normal == Vector2.down)
+        {
+            rigidbody.AddForce(new Vector2(0, -1), ForceMode2D.Impulse);
+        }
+
         try
         {
             if (collision.gameObject.tag == "Superplant"
