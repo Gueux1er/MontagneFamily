@@ -28,11 +28,13 @@ public class avatarLife : MonoBehaviour
     bool isDead;
     bool damaged;
     bool healed;
+    bool displayNoFilter;
 
     // Use this for initialization
     void Start()
     {
         isDead = false;
+        displayNoFilter = true;
         avatarController = GetComponent<avatarController>();
         currentLife = startingLife;
     }
@@ -47,7 +49,7 @@ public class avatarLife : MonoBehaviour
         {
             lifeImageEvnt.color = healedColour;
         }
-        else
+        else if(displayNoFilter)
         {
             lifeImageEvnt.color = Color.Lerp(lifeImageEvnt.color, Color.clear, flashSpeed * Time.deltaTime);
         }
@@ -99,9 +101,12 @@ public class avatarLife : MonoBehaviour
     {
         if (isDead) return;
         isDead = true;
+
+        StartCoroutine(BlinkWhite(true));
+        GetComponent<avatarTimeline>().ratioTime = 0;
+
         GetComponent<avatarController>().moveEnable = false;
         GetComponent<avatarController>().StopAllAnim();
-        StartCoroutine(BlinkWhite(true));
 
         // Evolution for all game objects
         GameObject[] tabGo = GameObject.FindGameObjectsWithTag("Recoltable");
@@ -150,6 +155,7 @@ public class avatarLife : MonoBehaviour
         GetComponent<Inventory>().EmptyCollected();
         GetComponent<Inventory>().AffectEffectSaved();
         GetComponent<avatarController>().moveEnable = true;
+        displayNoFilter = true;
         isDead = false;
         cptTry++;
     }
@@ -168,10 +174,40 @@ public class avatarLife : MonoBehaviour
 
         if (DieAfterBlink)
         {
+            StartCoroutine(FadeImage(false));
             yield return new WaitForSeconds(2f);
             DeathReset();
         }
 
         yield break;
+    }
+
+    IEnumerator FadeImage(bool fadeAway)
+    {
+        // fade from opaque to transparent
+        if (fadeAway)
+        {
+            // loop over 1 second backwards
+            for (float i = 1; i >= 0; i -= Time.deltaTime)
+            {
+                // set color with i as alpha
+                lifeImageEvnt.color = new Color(0, 0, 0, i);
+                yield return null;
+            }
+            displayNoFilter = true;
+        }
+        // fade from transparent to opaque
+        else
+        {
+            displayNoFilter = false;
+            // loop over 1 second
+            for (float i = 0; i <= 1; i += Time.deltaTime)
+            {
+                // set color with i as alpha
+                print(i);
+                lifeImageEvnt.color = new Color(0, 0, 0, i);
+                yield return null;
+            }
+        }
     }
 }
