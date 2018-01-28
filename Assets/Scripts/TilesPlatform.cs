@@ -26,7 +26,7 @@ public class TilesPlatform : MonoBehaviour {
         {
             if (Vector3.Distance(transform.position, platforms[i].transform.position) <= 2.5f && gameObject != platforms[i])
             {
-                if (transform.position.y < platforms[i].transform.position.y)
+                if (platforms[i].transform.position.y > transform.position.y)
                     isUp = true;
                 else if (platforms[i].transform.position.x > transform.position.x)
                     isRight = true;

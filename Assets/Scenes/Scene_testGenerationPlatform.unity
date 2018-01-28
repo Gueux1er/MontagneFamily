@@ -1036,6 +1036,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 114486262837141734, guid: 2f2e9c5470ec40b4db1d7dc8bef47bf4,
+        type: 2}
+      propertyPath: timeSlider
+      value: 
+      objectReference: {fileID: 219007671}
+    - target: {fileID: 114486262837141734, guid: 2f2e9c5470ec40b4db1d7dc8bef47bf4,
+        type: 2}
+      propertyPath: timedImage
+      value: 
+      objectReference: {fileID: 892073847}
+    - target: {fileID: 114093990422977176, guid: 2f2e9c5470ec40b4db1d7dc8bef47bf4,
+        type: 2}
+      propertyPath: InventoryUI
+      value: 
+      objectReference: {fileID: 312701333}
     - target: {fileID: 114085052534194814, guid: 2f2e9c5470ec40b4db1d7dc8bef47bf4,
         type: 2}
       propertyPath: lifeImageEvnt
@@ -1066,21 +1081,6 @@ Prefab:
       propertyPath: hearts.Array.data[4]
       value: 
       objectReference: {fileID: 575801678}
-    - target: {fileID: 114093990422977176, guid: 2f2e9c5470ec40b4db1d7dc8bef47bf4,
-        type: 2}
-      propertyPath: InventoryUI
-      value: 
-      objectReference: {fileID: 312701333}
-    - target: {fileID: 114486262837141734, guid: 2f2e9c5470ec40b4db1d7dc8bef47bf4,
-        type: 2}
-      propertyPath: timeSlider
-      value: 
-      objectReference: {fileID: 219007671}
-    - target: {fileID: 114486262837141734, guid: 2f2e9c5470ec40b4db1d7dc8bef47bf4,
-        type: 2}
-      propertyPath: timedImage
-      value: 
-      objectReference: {fileID: 892073847}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f2e9c5470ec40b4db1d7dc8bef47bf4, type: 2}
   m_IsPrefabParent: 0
