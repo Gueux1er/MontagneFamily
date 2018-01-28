@@ -114,6 +114,11 @@ public class avatarLife : MonoBehaviour
         isDead = true;
 
         StartCoroutine(BlinkWhite(true));
+        if (GetComponent<avatarTimeline>().currentTime >= GetComponent<avatarTimeline>().lifeExpectancy)
+            GetComponent<Animator>().SetBool("IsEndTime", true);
+        else
+            GetComponent<Animator>().SetBool("IsDeath", true);
+
         GetComponent<avatarTimeline>().ratioTime = 0;
 
         GetComponent<avatarController>().moveEnable = false;
@@ -170,6 +175,8 @@ public class avatarLife : MonoBehaviour
         UpdateHearts();
         GetComponent<Animator>().SetLayerWeight(1, 0);
         GetComponent<Animator>().SetLayerWeight(2, 0);
+        GetComponent<Animator>().SetBool("IsEndTime", false);
+        GetComponent<Animator>().SetBool("IsDeath", false);
 
         instantiateSkeleton(position);
 

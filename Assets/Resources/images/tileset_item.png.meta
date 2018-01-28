@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 1e8fe626ef24ad74a9c93c1ccf7d01b8
-timeCreated: 1517095551
+timeCreated: 1517143618
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -14,11 +14,12 @@ TextureImporter:
     21300014: tileset_item_7
     21300016: tileset_item_8
     21300018: tileset_item_9
+    21300020: tileset_item_10
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -225,6 +226,20 @@ TextureImporter:
         height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: tileset_item_10
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 68
+        width: 41
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

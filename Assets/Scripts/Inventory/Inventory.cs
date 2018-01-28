@@ -29,6 +29,7 @@ public class Inventory : MonoBehaviour {
         InventoryClosedContainerUI.gameObject.SetActive(false);
 
         closedBgInventory = Resources.Load<Sprite>("images/closedBgInventory");
+        updateDisplay();
         ToggleVisibility();
     }
 
@@ -53,7 +54,7 @@ public class Inventory : MonoBehaviour {
 
     public void ToggleVisibility()
     {
-        if(InventoryContainerUI.gameObject.activeSelf || collectedItems.Count + savedItems.Count == 0)
+        if(InventoryContainerUI.gameObject.activeSelf)
         {
             InventoryContainerUI.gameObject.SetActive(false);
             InventoryBgContainerUI.gameObject.SetActive(false);
@@ -73,6 +74,14 @@ public class Inventory : MonoBehaviour {
 
         DestroyAllChildren(InventoryBgContainerUI);
         DestroyAllChildren(InventoryContainerUI);
+
+        //Display empty inventory in case he have nothing
+        if(savedItems.Count + collectedItems.Count == 0)
+        {
+            tmp = Instantiate(pf_bgInventory, InventoryBgContainerUI);
+            tmp.GetComponent<Image>().sprite = Resources.Load<Sprite>("images/tileset_item");
+            return;
+        }
 
         int nbItems = savedItems.Count;
 
