@@ -5,11 +5,14 @@ using UnityEngine;
 public class SuperPlantController : MonoBehaviour {
 
     public GameObject[] plants = new GameObject[3];
+    public int shiftStart;
     private int currentPlant = 0;
 
     // Use this for initialization
     void Start () {
-		for(int i = 0; i < plants.Length; i++)
+        shiftStart = 0;
+
+        for (int i = 1; i < plants.Length; i++)
         {
             plants[i].SetActive(false);
         }
@@ -21,9 +24,12 @@ public class SuperPlantController : MonoBehaviour {
 		
 	}
 
-    public void growUp()
+    public void GrowUp()
     {
-        print("grow");
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<avatarLife>().cptTry < shiftStart) return;
+
+        if (currentPlant == plants.Length-1) return;
+
         plants[currentPlant].SetActive(false);
         currentPlant++;
         plants[currentPlant].SetActive(true);
