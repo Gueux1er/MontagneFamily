@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1389769113868230}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -34.55, y: 27.59, z: -0.044922}
+  m_LocalPosition: {x: -22.568, y: 58.67, z: -0.044922}
   m_LocalScale: {x: 7.2581396, y: 7, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,8 +79,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6d1cd532b90c4044865656621dc1e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heightToPlatformType1: 20
-  heightToPlatformType2: 40
+  heightToPlatformType1: 35
+  heightToPlatformType2: 75
   spritePlatform0:
   - {fileID: 21300002, guid: cb42711ed37cb2a43bceb135118e1445, type: 3}
   - {fileID: 21300022, guid: cb42711ed37cb2a43bceb135118e1445, type: 3}
