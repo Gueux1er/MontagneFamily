@@ -112,7 +112,7 @@ public class avatarController : MonoBehaviour
         if (Input.GetButton("Jump") && jumpAbility)
         {
             GetComponent<Animator>().SetBool("IsJump", true);
-            rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Force);
             jumpAbility = false;
             saut.start(); // Joue le son une fois
         }

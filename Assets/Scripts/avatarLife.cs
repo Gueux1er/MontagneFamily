@@ -23,11 +23,16 @@ public class avatarLife : MonoBehaviour
 
     public Image[]  hearts;
 
+    public GameObject pf_fmodEmitter;
+    private GameObject fmodEmitter;
 
     avatarController avatarController;
     bool isDead;
     bool damaged;
     bool healed;
+
+
+    FMOD.Studio.EventInstance ambianceJeu; //Instanciation du son
 
     // Use this for initialization
     void Start()
@@ -35,6 +40,9 @@ public class avatarLife : MonoBehaviour
         isDead = false;
         avatarController = GetComponent<avatarController>();
         currentLife = startingLife;
+
+        fmodEmitter = Instantiate(pf_fmodEmitter);
+        ambianceJeu = FMODUnity.RuntimeManager.CreateInstance("event:/Environnement/Ambiance"); // Chemin du son 
     }
 
     // Update is called once per frame
@@ -119,6 +127,7 @@ public class avatarLife : MonoBehaviour
             tabSuperplant[i].GetComponent<SuperPlantController>().GrowUp();
         }
 
+        Destroy(fmodEmitter);
     }
 
     private void instantiateSkeleton(Vector2 position)
@@ -134,6 +143,7 @@ public class avatarLife : MonoBehaviour
 
     private void DeathReset()
     {
+        fmodEmitter = Instantiate(pf_fmodEmitter);
         Vector2 position = gameObject.transform.position;
         // Reset position /life/etc
         GetComponent<avatarTimeline>().ResetTimeline();
