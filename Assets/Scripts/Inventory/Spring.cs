@@ -7,7 +7,7 @@ public class Spring : Stuff
 
     public override void ApplyEffect(GameObject gameObject)
     {
-        gameObject.GetComponent<avatarController>().fallBonus += 1;
-        gameObject.GetComponent<avatarController>().jumpForce += 1;
+        gameObject.GetComponent<avatarController>().fallBonus += 1.5f;
+        gameObject.GetComponent<avatarController>().jumpForce += 2.5f;
     }
 }

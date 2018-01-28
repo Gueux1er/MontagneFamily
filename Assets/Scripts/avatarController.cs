@@ -146,17 +146,16 @@ public class avatarController : MonoBehaviour
 
             reception.start(); // Joue le son une fois
 
-
-            if (highFall >= 12 + fallBonus*3)
+            if (highFall >= 15.3 + fallBonus)
             {
                 avatarLife.TakeDamage(5);
-            } else if (highFall >= 11 + fallBonus * 3)
+            } else if (highFall >= 13.1 + fallBonus)
             {
-                avatarLife.TakeDamage(4);
-            } else if (highFall >= 9 + fallBonus *2)
+                avatarLife.TakeDamage(3);
+            } else if (highFall >= 10.9 + fallBonus) 
             {
                 avatarLife.TakeDamage(2);
-            } else if (highFall >= 7 + fallBonus)
+            } else if (highFall >= 8.7 + fallBonus)
             {
                 avatarLife.TakeDamage(1);
             }
@@ -176,6 +175,12 @@ public class avatarController : MonoBehaviour
             jumpAbility = true;
             
         }
+
+        else if (collision.gameObject.tag == "Plateform" && collision.contacts[0].normal == Vector2.down)
+        {
+            rigidbody.AddForce(new Vector2(0, -1), ForceMode2D.Impulse);
+        }
+
         try
         {
             if (collision.gameObject.tag == "Superplant"
