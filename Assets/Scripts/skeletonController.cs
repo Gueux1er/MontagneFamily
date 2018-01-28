@@ -23,7 +23,6 @@ public class skeletonController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Plateform")
         {
-            Debug.Log("Collide");
             GetComponent<Rigidbody2D>().gravityScale = 0;
             GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
             skull.GetComponent<Rigidbody2D>().freezeRotation = false;
