@@ -7,7 +7,7 @@ public class avatarTimeline : MonoBehaviour {
 
     public enum AvatarAge { YOUNG, ADULT, OLD, DEAD};
     private AvatarAge age;
-    public GameObject[] colliderObjectsAge;
+    public Collider2D[] colliderObjectsAge;
     public float currentTime;
     public float lifeExpectancy = 100f;
     public Slider timeSlider;
@@ -43,8 +43,8 @@ public class avatarTimeline : MonoBehaviour {
             avatarController.setAllAgePourAudio(1.0f);
             timed = true;
             GetComponent<Animator>().SetLayerWeight(1, 1);
-            colliderObjectsAge[0].SetActive(false);
-            colliderObjectsAge[1].SetActive(true);
+            colliderObjectsAge[0].enabled = false;
+            colliderObjectsAge[1].enabled = true;
 
         } else if ((int)currentTime == 0.8* lifeExpectancy && age != AvatarAge.OLD)
         {
@@ -52,8 +52,8 @@ public class avatarTimeline : MonoBehaviour {
             avatarController.setAllAgePourAudio(2.0f);
             timed = true;
             GetComponent<Animator>().SetLayerWeight(2, 1);
-            colliderObjectsAge[1].SetActive(false);
-            colliderObjectsAge[2].SetActive(true);
+            colliderObjectsAge[1].enabled = false;
+            colliderObjectsAge[2].enabled = true;
 
         } else if ((int)currentTime == lifeExpectancy - 5 && !playingEssouflement) 
         {
@@ -89,7 +89,7 @@ public class avatarTimeline : MonoBehaviour {
     {
         currentTime = 0f; ;
         age = AvatarAge.YOUNG;
-        colliderObjectsAge[0].SetActive(true);
-        colliderObjectsAge[2].SetActive(false);
+        colliderObjectsAge[0].enabled = true;
+        colliderObjectsAge[2].enabled = false;
     }
 }
