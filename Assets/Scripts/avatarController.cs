@@ -140,22 +140,23 @@ public class avatarController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Plateform" && collision.contacts[0].normal == Vector2.up)
         {
+            GetComponent<Animator>().SetBool("IsJump", false);
             float highFall = maximumJumpY - rigidbody.position.y;
             if (highFall < 1) return;
-            GetComponent<Animator>().SetBool("IsJump", false);
 
             reception.start(); // Joue le son une fois
 
+            print(highFall);
             if (highFall >= 15.3 + fallBonus)
             {
                 avatarLife.TakeDamage(5);
             } else if (highFall >= 13.1 + fallBonus)
             {
                 avatarLife.TakeDamage(3);
-            } else if (highFall >= 10.9 + fallBonus) 
+            } else if (highFall >= 12 + fallBonus) 
             {
                 avatarLife.TakeDamage(2);
-            } else if (highFall >= 8.7 + fallBonus)
+            } else if (highFall >= 9.8 + fallBonus)
             {
                 avatarLife.TakeDamage(1);
             }
