@@ -7,6 +7,6 @@ public class Potion : Stuff
 
     public override void ApplyEffect(GameObject gameObject)
     {
-        gameObject.GetComponent<avatarTimeline>().ratioTime *= 0.7f;
+        gameObject.GetComponent<avatarTimeline>().ratioTime *= 0.9f;
     }
 }
