@@ -138,8 +138,6 @@ public class avatarController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        print(collision.contacts[0].normal);
-        print(Vector2.up);
         if (collision.gameObject.tag == "Plateform" && collision.contacts[0].normal == Vector2.up)
         {
             float highFall = maximumJumpY - rigidbody.position.y;
@@ -238,6 +236,7 @@ public class avatarController : MonoBehaviour
     {
         moveSpeed = defaultMovespeed;
         fallBonus = 0;
+        maximumJumpY = originPosition.y;
         jumpForce = defaultJumpForce;
         GetComponent<avatarTimeline>().ratioTime = 1;
     }
