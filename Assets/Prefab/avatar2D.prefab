@@ -195,6 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3028c35f73003b7488b69d38a50318c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cptTry: 1
   startingLife: 5
   maxLife: 5
   currentLife: 0
@@ -204,7 +205,7 @@ MonoBehaviour:
   healedColour: {r: 0, g: 1, b: 0, a: 0.3}
   heartFull: {fileID: 21300008, guid: 1e8fe626ef24ad74a9c93c1ccf7d01b8, type: 3}
   heartEmpty: {fileID: 21300010, guid: 1e8fe626ef24ad74a9c93c1ccf7d01b8, type: 3}
-  pf_skeleton: {fileID: 1846716558223010, guid: 42ff287ebf82ed045bff3afaa0e8e531,
+  pf_skeleton: {fileID: 1801654505485898, guid: 42ff287ebf82ed045bff3afaa0e8e531,
     type: 2}
   nbSkeleton: 3
   hearts:
@@ -263,7 +264,7 @@ MonoBehaviour:
   timeSlider: {fileID: 0}
   timedImage: {fileID: 0}
   flashSpeed: 5
-  ratioTime: 1
+  ratioTime: 10
 --- !u!124 &124504251495313072
 Behaviour:
   m_ObjectHideFlags: 1
