@@ -140,9 +140,9 @@ public class avatarController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Plateform" && collision.contacts[0].normal == Vector2.up)
         {
+            GetComponent<Animator>().SetBool("IsJump", false);
             float highFall = maximumJumpY - rigidbody.position.y;
             if (highFall < 1) return;
-            GetComponent<Animator>().SetBool("IsJump", false);
 
             reception.start(); // Joue le son une fois
 
