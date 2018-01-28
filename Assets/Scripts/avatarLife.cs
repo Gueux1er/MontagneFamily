@@ -25,14 +25,14 @@ public class avatarLife : MonoBehaviour
 
 
     avatarController avatarController;
-    bool isDeadOld;
+    bool isDead;
     bool damaged;
     bool healed;
 
     // Use this for initialization
     void Start()
     {
-
+        isDead = false;
         avatarController = GetComponent<avatarController>();
         currentLife = startingLife;
     }
@@ -97,6 +97,8 @@ public class avatarLife : MonoBehaviour
 
     public void Death()
     {
+        if (isDead) return;
+        isDead = true;
         GetComponent<avatarController>().moveEnable = false;
         GetComponent<avatarController>().StopAllAnim();
         StartCoroutine(BlinkWhite(true));
@@ -110,6 +112,13 @@ public class avatarLife : MonoBehaviour
                 tabGo[i].GetComponent<ItemController>().NextGeneration();
             }
         }
+
+        GameObject[] tabSuperplant = GameObject.FindGameObjectsWithTag("Superplant");
+        for(int i=0; i<tabSuperplant.Length; i++)
+        {
+            tabSuperplant[i].GetComponent<SuperPlantController>().GrowUp();
+        }
+
     }
 
     private void instantiateSkeleton(Vector2 position)
@@ -120,7 +129,7 @@ public class avatarLife : MonoBehaviour
         {
             Destroy(skeletons.Dequeue());
         }
-        skeleton.GetComponent<Rigidbody2D>().MovePosition(position);
+        skeleton.transform.position = position;
     }
 
     private void DeathReset()
@@ -136,15 +145,16 @@ public class avatarLife : MonoBehaviour
         GetComponent<Animator>().SetLayerWeight(1, 0);
         GetComponent<Animator>().SetLayerWeight(2, 0);
 
-        instantiateSkeleton(position);
+        //instantiateSkeleton(position);
 
         GetComponent<Inventory>().EmptyCollected();
         GetComponent<Inventory>().AffectEffectSaved();
         GetComponent<avatarController>().moveEnable = true;
+        isDead = false;
         cptTry++;
     }
 
-    public IEnumerator BlinkWhite(bool isDead)
+    public IEnumerator BlinkWhite(bool DieAfterBlink)
     {
         SpriteRenderer sprite_avatar = GetComponent<SpriteRenderer>();
 
@@ -156,7 +166,7 @@ public class avatarLife : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
 
-        if (isDead)
+        if (DieAfterBlink)
         {
             yield return new WaitForSeconds(2f);
             DeathReset();
