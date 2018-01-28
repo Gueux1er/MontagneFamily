@@ -145,7 +145,7 @@ public class avatarLife : MonoBehaviour
         GetComponent<Animator>().SetLayerWeight(1, 0);
         GetComponent<Animator>().SetLayerWeight(2, 0);
 
-        //instantiateSkeleton(position);
+        instantiateSkeleton(position);
 
         GetComponent<Inventory>().EmptyCollected();
         GetComponent<Inventory>().AffectEffectSaved();
