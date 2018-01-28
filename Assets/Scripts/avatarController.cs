@@ -9,8 +9,7 @@ public class avatarController : MonoBehaviour
     public float fallBonus = 0;
     public float jumpForce;
     private float defaultJumpForce = 15;
-    private float defaultX;
-    private float defaultY;
+    private Vector2 originPosition;
 
     public bool moveEnable = true;
 
@@ -49,8 +48,7 @@ public class avatarController : MonoBehaviour
         inventory = GetComponent<Inventory>();
         avatarLife = GetComponent<avatarLife>();
 
-        defaultX = transform.position.x;
-        defaultY = transform.position.y;
+        originPosition = transform.position;
 
         //*** Sons ***//
 
@@ -177,10 +175,27 @@ public class avatarController : MonoBehaviour
             jumpAbility = true;
             
         }
+        try
+        {
+            if (collision.gameObject.tag == "SuperplantLast"
+                && collision.contacts[0].normal == Vector2.up
+                && collision.gameObject.GetComponent<BoxCollider2D>().enabled)
+            {
+                collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                StartCoroutine(ReableSuperplant(collision.gameObject));
+            }
+        } catch {}
 
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    public IEnumerator ReableSuperplant(GameObject superPlantLast)
+    {
+        yield return new WaitForSeconds(2f);
+        superPlantLast.GetComponent<BoxCollider2D>().enabled = true;
+        yield break;
+    }
+
+        void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Checkpoint")
         {
@@ -213,7 +228,7 @@ public class avatarController : MonoBehaviour
     public void ResetPosition()
     {
         rigidbody.velocity = new Vector2(0,0);
-        rigidbody.MovePosition(new Vector2(defaultX, defaultY));
+        transform.position = originPosition;
     }
 
     public void ResetStats()
