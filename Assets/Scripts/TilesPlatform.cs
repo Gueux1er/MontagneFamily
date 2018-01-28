@@ -46,9 +46,9 @@ public class TilesPlatform : MonoBehaviour {
             spritePlatformToApply = spritePlatform1;
         else
             spritePlatformToApply = spritePlatform0;
-
         
-        if ((isLeft && isRight && isDown && !isUp) || (isLeft && isRight && !isUp && !isDown) || (isDown && !isUp && !isLeft && !isRight))
+
+        if ((!isLeft && !isRight && !isDown && !isUp) || (isLeft && isRight && isDown && !isUp) || (isLeft && isRight && !isUp && !isDown) || (isDown && !isUp && !isLeft && !isRight))
         {
             GetComponent<SpriteRenderer>().sprite = spritePlatformToApply[0];
         }
