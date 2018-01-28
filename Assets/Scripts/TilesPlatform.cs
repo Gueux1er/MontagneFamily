@@ -39,45 +39,50 @@ public class TilesPlatform : MonoBehaviour {
             }
         }
 
-        //TODO Check hauteur
-        spritePlatformToApply = spritePlatform0;
+        
+        if (transform.position.y >= heightToPlatformType2)
+            spritePlatformToApply = spritePlatform2;
+        else if (transform.position.y >= heightToPlatformType1)
+            spritePlatformToApply = spritePlatform1;
+        else
+            spritePlatformToApply = spritePlatform0;
 
         
-        if ((isUp && isLeft && isRight && isDown) || (isUp && isDown))
-        {
-            GetComponent<SpriteRenderer>().sprite = spritePlatformToApply[1];
-        }
-        else if (isUp && isLeft && isRight && !isDown)
-        {
-            GetComponent<SpriteRenderer>().sprite = spritePlatformToApply[2];
-        }
-        else if(isLeft && isRight && isDown || (isLeft && isRight) || (isDown && isRight) || (isDown && !isUp && !isLeft && !isRight))
+        if ((isLeft && isRight && isDown && !isUp) || (isLeft && isRight && !isUp && !isDown) || (isDown && !isUp && !isLeft && !isRight))
         {
             GetComponent<SpriteRenderer>().sprite = spritePlatformToApply[0];
         }
+        else if ((isUp && isLeft && isRight && isDown) || (isUp && isDown && !isRight && !isLeft))
+        {
+            GetComponent<SpriteRenderer>().sprite = spritePlatformToApply[Random.Range(8, 10)];
+        }
+        else if (isUp && isLeft && isRight && !isDown)
+        {
+            GetComponent<SpriteRenderer>().sprite = spritePlatformToApply[1];
+        }
         else if (isUp && isRight && isDown)
         {
-            GetComponent<SpriteRenderer>().sprite = spritePlatformToApply[3];
+            GetComponent<SpriteRenderer>().sprite = spritePlatformToApply[2];
         }
         else if (isUp && isLeft && isDown)
         {
-            GetComponent<SpriteRenderer>().sprite = spritePlatformToApply[4];
+            GetComponent<SpriteRenderer>().sprite = spritePlatformToApply[3];
         }
-        else if ((isLeft && isDown) || (isLeft && !isUp && !isDown))
+        else if ((isLeft && isDown) || (isLeft && !isUp && !isDown && !isRight))
         {
-            GetComponent<SpriteRenderer>().sprite = spritePlatformToApply[5];
+            GetComponent<SpriteRenderer>().sprite = spritePlatformToApply[4];
         }
         else if ((isRight && isDown) || (isRight && !isUp && !isDown))
         {
-            GetComponent<SpriteRenderer>().sprite = spritePlatformToApply[6];
+            GetComponent<SpriteRenderer>().sprite = spritePlatformToApply[5];
         }
         else if (isRight && isUp)
         {
-            GetComponent<SpriteRenderer>().sprite = spritePlatformToApply[7];
+            GetComponent<SpriteRenderer>().sprite = spritePlatformToApply[6];
         }
         else if (isLeft && isUp)
         {
-            GetComponent<SpriteRenderer>().sprite = spritePlatformToApply[8];
+            GetComponent<SpriteRenderer>().sprite = spritePlatformToApply[7];
         }
     }
 }
