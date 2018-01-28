@@ -110,6 +110,13 @@ public class avatarLife : MonoBehaviour
                 tabGo[i].GetComponent<ItemController>().NextGeneration();
             }
         }
+
+        GameObject[] tabSuperplant = GameObject.FindGameObjectsWithTag("Superplant");
+        for(int i=0; i<tabSuperplant.Length; i++)
+        {
+            tabSuperplant[i].GetComponent<SuperPlantController>().GrowUp();
+        }
+
     }
 
     private void instantiateSkeleton(Vector2 position)
