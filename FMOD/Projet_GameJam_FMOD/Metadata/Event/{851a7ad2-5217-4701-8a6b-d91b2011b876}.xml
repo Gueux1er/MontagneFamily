@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="Event" id="{851a7ad2-5217-4701-8a6b-d91b2011b876}">
         <property name="name">
-            <value>Nature</value>
+            <value>Menu</value>
         </property>
         <property name="outputFormat">
             <value>1</value>
@@ -210,7 +210,7 @@
             <value>0</value>
         </property>
         <property name="value">
-            <value>1</value>
+            <value>10</value>
         </property>
         <property name="curveShape">
             <value>-0.134859413</value>
@@ -221,7 +221,7 @@
             <value>5.0123051681706325</value>
         </property>
         <property name="value">
-            <value>-80</value>
+            <value>-42.5</value>
         </property>
     </object>
 </objects>
