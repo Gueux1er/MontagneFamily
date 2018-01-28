@@ -9,8 +9,8 @@ public class avatarController : MonoBehaviour
     public float fallBonus = 0;
     public float jumpForce;
     private float defaultJumpForce = 15;
-    public float defaultX = 0f;
-    public float defaultY = 1.5f;
+    private float defaultX;
+    private float defaultY;
 
     public bool moveEnable = true;
 
@@ -48,6 +48,9 @@ public class avatarController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         inventory = GetComponent<Inventory>();
         avatarLife = GetComponent<avatarLife>();
+
+        defaultX = transform.position.x;
+        defaultY = transform.position.y;
 
         //*** Sons ***//
 
