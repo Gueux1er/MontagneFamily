@@ -32,7 +32,10 @@ public class StartOptions : MonoBehaviour {
 
 		//Get a reference to PlayMusic attached to UI object
 		playMusic = GetComponent<PlayMusic> ();
-	}
+
+        changeMusicOnStart = true;
+
+    }
 
 
 	public void StartButtonClicked()

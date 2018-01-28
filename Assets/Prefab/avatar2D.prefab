@@ -266,6 +266,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  pf_fmodEmitter: {fileID: 1389873884261744, guid: a123c913ee23c8a42b764988fd08fe6b,
+    type: 2}
 --- !u!114 &114093990422977176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -360,7 +362,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 21300004, guid: a5c5699fcf49d854389645ad1f73bb8f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1

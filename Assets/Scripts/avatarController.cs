@@ -112,7 +112,7 @@ public class avatarController : MonoBehaviour
         if (Input.GetButton("Jump") && jumpAbility)
         {
             GetComponent<Animator>().SetBool("IsJump", true);
-            rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Force);
             jumpAbility = false;
             saut.start(); // Joue le son une fois
         }
@@ -178,14 +178,14 @@ public class avatarController : MonoBehaviour
         }
         try
         {
-            if (collision.gameObject.tag == "SuperplantLast"
+            if (collision.gameObject.tag == "Superplant"
                 && collision.contacts[0].normal == Vector2.up
                 && collision.gameObject.GetComponent<BoxCollider2D>().enabled)
             {
                 collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 StartCoroutine(ReableSuperplant(collision.gameObject));
-            }
-        } catch {}
+            } 
+        } catch { print("TODO : managed error"); }
 
     }
 
