@@ -120,7 +120,7 @@ public class avatarLife : MonoBehaviour
         {
             Destroy(skeletons.Dequeue());
         }
-        skeleton.GetComponent<Rigidbody2D>().MovePosition(position);
+        skeleton.transform.position = position;
     }
 
     private void DeathReset()
