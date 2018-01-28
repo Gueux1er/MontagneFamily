@@ -112,7 +112,7 @@ public class avatarController : MonoBehaviour
         if (Input.GetButton("Jump") && jumpAbility)
         {
             GetComponent<Animator>().SetBool("IsJump", true);
-            rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Force);
             jumpAbility = false;
             saut.start(); // Joue le son une fois
         }
@@ -138,13 +138,14 @@ public class avatarController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Plateform" && collision.contacts[0].normal == Vector2.up)
+        if (collision.gameObject.tag == "Plateform" && collision.contacts[0].normal == Vector2.up)
         {
+            float highFall = maximumJumpY - rigidbody.position.y;
+            if (highFall < 1) return;
             GetComponent<Animator>().SetBool("IsJump", false);
 
             reception.start(); // Joue le son une fois
 
-            float highFall = maximumJumpY - rigidbody.position.y;
 
             if (highFall >= 12 + fallBonus*3)
             {
@@ -177,14 +178,14 @@ public class avatarController : MonoBehaviour
         }
         try
         {
-            if (collision.gameObject.tag == "SuperplantLast"
+            if (collision.gameObject.tag == "Superplant"
                 && collision.contacts[0].normal == Vector2.up
                 && collision.gameObject.GetComponent<BoxCollider2D>().enabled)
             {
                 collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 StartCoroutine(ReableSuperplant(collision.gameObject));
-            }
-        } catch {}
+            } 
+        } catch { print("TODO : managed error"); }
 
     }
 
@@ -235,6 +236,7 @@ public class avatarController : MonoBehaviour
     {
         moveSpeed = defaultMovespeed;
         fallBonus = 0;
+        maximumJumpY = originPosition.y;
         jumpForce = defaultJumpForce;
         GetComponent<avatarTimeline>().ratioTime = 1;
     }

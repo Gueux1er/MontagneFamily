@@ -24,11 +24,22 @@ public class SuperPlantController : MonoBehaviour
     public void GrowUp()
     {
         if (GameObject.FindGameObjectWithTag("Player").GetComponent<avatarLife>().cptTry < shiftStart) return;
-
+        
         if (currentPlant == plants.Length - 1) return;
 
         plants[currentPlant].SetActive(false);
         currentPlant++;
         plants[currentPlant].SetActive(true);
+
+        if(currentPlant == plants.Length - 1)
+        {
+            gameObject.GetComponent<Collider2D>().enabled = true;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+            GetComponent<Animator>().SetTrigger("Bounce");
     }
 }

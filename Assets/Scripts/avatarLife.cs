@@ -23,18 +23,28 @@ public class avatarLife : MonoBehaviour
 
     public Image[]  hearts;
 
+    public GameObject pf_fmodEmitter;
+    private GameObject fmodEmitter;
 
     avatarController avatarController;
     bool isDead;
     bool damaged;
     bool healed;
+    bool displayNoFilter;
+
+
+    FMOD.Studio.EventInstance ambianceJeu; //Instanciation du son
 
     // Use this for initialization
     void Start()
     {
         isDead = false;
+        displayNoFilter = true;
         avatarController = GetComponent<avatarController>();
         currentLife = startingLife;
+
+        fmodEmitter = Instantiate(pf_fmodEmitter);
+        ambianceJeu = FMODUnity.RuntimeManager.CreateInstance("event:/Environnement/Ambiance"); // Chemin du son 
     }
 
     // Update is called once per frame
@@ -47,7 +57,7 @@ public class avatarLife : MonoBehaviour
         {
             lifeImageEvnt.color = healedColour;
         }
-        else
+        else if(displayNoFilter)
         {
             lifeImageEvnt.color = Color.Lerp(lifeImageEvnt.color, Color.clear, flashSpeed * Time.deltaTime);
         }
@@ -99,9 +109,12 @@ public class avatarLife : MonoBehaviour
     {
         if (isDead) return;
         isDead = true;
+
+        StartCoroutine(BlinkWhite(true));
+        GetComponent<avatarTimeline>().ratioTime = 0;
+
         GetComponent<avatarController>().moveEnable = false;
         GetComponent<avatarController>().StopAllAnim();
-        StartCoroutine(BlinkWhite(true));
 
         // Evolution for all game objects
         GameObject[] tabGo = GameObject.FindGameObjectsWithTag("Recoltable");
@@ -119,6 +132,7 @@ public class avatarLife : MonoBehaviour
             tabSuperplant[i].GetComponent<SuperPlantController>().GrowUp();
         }
 
+        Destroy(fmodEmitter);
     }
 
     private void instantiateSkeleton(Vector2 position)
@@ -134,6 +148,7 @@ public class avatarLife : MonoBehaviour
 
     private void DeathReset()
     {
+        fmodEmitter = Instantiate(pf_fmodEmitter);
         Vector2 position = gameObject.transform.position;
         // Reset position /life/etc
         GetComponent<avatarTimeline>().ResetTimeline();
@@ -150,6 +165,7 @@ public class avatarLife : MonoBehaviour
         GetComponent<Inventory>().EmptyCollected();
         GetComponent<Inventory>().AffectEffectSaved();
         GetComponent<avatarController>().moveEnable = true;
+        displayNoFilter = true;
         isDead = false;
         cptTry++;
     }
@@ -168,10 +184,39 @@ public class avatarLife : MonoBehaviour
 
         if (DieAfterBlink)
         {
+            StartCoroutine(FadeImage(false));
             yield return new WaitForSeconds(2f);
             DeathReset();
         }
 
         yield break;
+    }
+
+    IEnumerator FadeImage(bool fadeAway)
+    {
+        // fade from opaque to transparent
+        if (fadeAway)
+        {
+            // loop over 1 second backwards
+            for (float i = 1; i >= 0; i -= Time.deltaTime)
+            {
+                // set color with i as alpha
+                lifeImageEvnt.color = new Color(0, 0, 0, i);
+                yield return null;
+            }
+            displayNoFilter = true;
+        }
+        // fade from transparent to opaque
+        else
+        {
+            displayNoFilter = false;
+            // loop over 1 second
+            for (float i = 0; i <= 1; i += Time.deltaTime)
+            {
+                // set color with i as alpha
+                lifeImageEvnt.color = new Color(0, 0, 0, i);
+                yield return null;
+            }
+        }
     }
 }

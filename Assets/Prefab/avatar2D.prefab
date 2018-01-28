@@ -44,9 +44,9 @@ GameObject:
   - component: {fileID: 114486262837141734}
   - component: {fileID: 114093990422977176}
   - component: {fileID: 95364606120131414}
-  - component: {fileID: 70642233385063942}
-  - component: {fileID: 70444915468577802}
-  - component: {fileID: 70920441946687140}
+  - component: {fileID: 61154090847179402}
+  - component: {fileID: 61519428838362518}
+  - component: {fileID: 61245767243326750}
   m_Layer: 0
   m_Name: avatar2D
   m_TagString: Player
@@ -74,7 +74,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1922525768687750}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: -10}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children:
   - {fileID: 4447540790168102}
@@ -137,23 +137,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &70444915468577802
-CapsuleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1922525768687750}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.2}
-  m_Size: {x: 0.16, y: 0.4}
-  m_Direction: 0
---- !u!70 &70642233385063942
-CapsuleCollider2D:
+--- !u!61 &61154090847179402
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -165,10 +150,20 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.16}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 0.16, y: 0.32}
+    newSize: {x: 0.16, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 0.16, y: 0.32}
-  m_Direction: 0
---- !u!70 &70920441946687140
-CapsuleCollider2D:
+  m_EdgeRadius: 0
+--- !u!61 &61245767243326750
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -180,8 +175,43 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.185}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 0.16, y: 0.32}
+    newSize: {x: 0.16, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 0.15, y: 0.37}
-  m_Direction: 0
+  m_EdgeRadius: 0
+--- !u!61 &61519428838362518
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1922525768687750}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.2}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 0.16, y: 0.32}
+    newSize: {x: 0.16, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.16, y: 0.4}
+  m_EdgeRadius: 0
 --- !u!81 &81696322360790232
 AudioListener:
   m_ObjectHideFlags: 1
@@ -236,6 +266,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  pf_fmodEmitter: {fileID: 1389873884261744, guid: a123c913ee23c8a42b764988fd08fe6b,
+    type: 2}
 --- !u!114 &114093990422977176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -281,9 +313,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderObjectsAge:
-  - {fileID: 70642233385063942}
-  - {fileID: 70444915468577802}
-  - {fileID: 70920441946687140}
+  - {fileID: 61154090847179402}
+  - {fileID: 61519428838362518}
+  - {fileID: 61245767243326750}
   currentTime: 0
   lifeExpectancy: 100
   timeSlider: {fileID: 0}
@@ -330,7 +362,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 21300004, guid: a5c5699fcf49d854389645ad1f73bb8f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
