@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Recoltable
   - Plateform
+  - Checkpoint
+  - Superplant
   layers:
   - Default
   - TransparentFX
