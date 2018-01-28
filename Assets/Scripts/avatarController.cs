@@ -178,9 +178,24 @@ public class avatarController : MonoBehaviour
             
         }
 
+        if(collision.gameObject.tag == "SuperplantLast"
+            && collision.contacts[0].normal == Vector2.up
+            && collision.gameObject.GetComponent<BoxCollider2D>().enabled)
+        {
+            collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            StartCoroutine(ReableSuperplant(collision.gameObject));
+        }
+
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    public IEnumerator ReableSuperplant(GameObject superPlantLast)
+    {
+        yield return new WaitForSeconds(2f);
+        superPlantLast.GetComponent<BoxCollider2D>().enabled = true;
+        yield break;
+    }
+
+        void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Checkpoint")
         {

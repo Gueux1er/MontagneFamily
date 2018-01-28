@@ -18,8 +18,9 @@ public class SuperPlantController : MonoBehaviour
             plants[i].SetActive(false);
         }
         plants[0].SetActive(true);
-    }
 
+	}
+	
     public void GrowUp()
     {
         if (GameObject.FindGameObjectWithTag("Player").GetComponent<avatarLife>().cptTry < shiftStart) return;

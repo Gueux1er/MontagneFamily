@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 50613406230871200}
   m_Layer: 0
   m_Name: skull
-  m_TagString: Untagged
+  m_TagString: Plateform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
