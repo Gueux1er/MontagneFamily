@@ -204,7 +204,6 @@ public class avatarLife : MonoBehaviour
             for (float i = 0; i <= 1; i += Time.deltaTime)
             {
                 // set color with i as alpha
-                print(i);
                 lifeImageEvnt.color = new Color(0, 0, 0, i);
                 yield return null;
             }

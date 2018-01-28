@@ -178,14 +178,14 @@ public class avatarController : MonoBehaviour
         }
         try
         {
-            if (collision.gameObject.tag == "SuperplantLast"
+            if (collision.gameObject.tag == "Superplant"
                 && collision.contacts[0].normal == Vector2.up
                 && collision.gameObject.GetComponent<BoxCollider2D>().enabled)
             {
                 collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 StartCoroutine(ReableSuperplant(collision.gameObject));
-            }
-        } catch {}
+            } 
+        } catch { print("TODO : managed error"); }
 
     }
 
