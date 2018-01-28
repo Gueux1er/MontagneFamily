@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class TilesPlatform : MonoBehaviour {
 
+    public int heightToPlatformType1;
+    public int heightToPlatformType2;
+
     public Sprite[] spritePlatform0;
     public Sprite[] spritePlatform1;
     public Sprite[] spritePlatform2;
-    public Sprite[] spritePlatform3;
     public GameObject prefabGround;
     public Sprite[] spriteGround0;
     public Sprite[] spriteGround1;
