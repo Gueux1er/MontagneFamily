@@ -39,6 +39,7 @@ public class ItemController : MonoBehaviour
 
     public virtual void take(GameObject other)
     {
+        canBeTaken = false;
         gameObjectTaken = other;
         gameObjectTaken.GetComponent<Inventory>().GetItem(this);
         ApplyEffect();
