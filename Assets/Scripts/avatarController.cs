@@ -146,17 +146,17 @@ public class avatarController : MonoBehaviour
 
             reception.start(); // Joue le son une fois
 
-
-            if (highFall >= 12 + fallBonus*3)
+            print(highFall);
+            if (highFall >= 15.3 + fallBonus*3)
             {
                 avatarLife.TakeDamage(5);
-            } else if (highFall >= 11 + fallBonus * 3)
+            } else if (highFall >= 13.1 + fallBonus * 3)
             {
-                avatarLife.TakeDamage(4);
-            } else if (highFall >= 9 + fallBonus *2)
+                avatarLife.TakeDamage(3);
+            } else if (highFall >= 10.9 + fallBonus *2) 
             {
                 avatarLife.TakeDamage(2);
-            } else if (highFall >= 7 + fallBonus)
+            } else if (highFall >= 8.7 + fallBonus)
             {
                 avatarLife.TakeDamage(1);
             }
