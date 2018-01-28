@@ -24,7 +24,6 @@ public class TilesPlatform : MonoBehaviour {
 
         for (int i = 0; i < platforms.Length; ++i)
         {
-            Debug.Log(Vector3.Distance(transform.position, platforms[i].transform.position));
             if (Vector3.Distance(transform.position, platforms[i].transform.position) <= 2.5f && gameObject != platforms[i])
             {
                 if (transform.position.y < platforms[i].transform.position.y)
