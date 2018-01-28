@@ -177,14 +177,16 @@ public class avatarController : MonoBehaviour
             jumpAbility = true;
             
         }
-
-        if(collision.gameObject.tag == "SuperplantLast"
-            && collision.contacts[0].normal == Vector2.up
-            && collision.gameObject.GetComponent<BoxCollider2D>().enabled)
+        try
         {
-            collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            StartCoroutine(ReableSuperplant(collision.gameObject));
-        }
+            if (collision.gameObject.tag == "SuperplantLast"
+                && collision.contacts[0].normal == Vector2.up
+                && collision.gameObject.GetComponent<BoxCollider2D>().enabled)
+            {
+                collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                StartCoroutine(ReableSuperplant(collision.gameObject));
+            }
+        } catch {}
 
     }
 
