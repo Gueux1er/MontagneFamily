@@ -284,7 +284,7 @@ RectTransform:
   - {fileID: 1108939558}
   - {fileID: 312701333}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -561,7 +561,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &296843858
 Prefab:
@@ -858,7 +858,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4052032208122708, guid: 117aa9bd408cfda46a97abefffc3d634, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 61500570214929558, guid: 117aa9bd408cfda46a97abefffc3d634,
         type: 2}
@@ -1034,23 +1034,8 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4521079408724452, guid: 2f2e9c5470ec40b4db1d7dc8bef47bf4, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 114486262837141734, guid: 2f2e9c5470ec40b4db1d7dc8bef47bf4,
-        type: 2}
-      propertyPath: timeSlider
-      value: 
-      objectReference: {fileID: 219007671}
-    - target: {fileID: 114486262837141734, guid: 2f2e9c5470ec40b4db1d7dc8bef47bf4,
-        type: 2}
-      propertyPath: timedImage
-      value: 
-      objectReference: {fileID: 892073847}
-    - target: {fileID: 114093990422977176, guid: 2f2e9c5470ec40b4db1d7dc8bef47bf4,
-        type: 2}
-      propertyPath: InventoryUI
-      value: 
-      objectReference: {fileID: 312701333}
     - target: {fileID: 114085052534194814, guid: 2f2e9c5470ec40b4db1d7dc8bef47bf4,
         type: 2}
       propertyPath: lifeImageEvnt
@@ -1081,6 +1066,30 @@ Prefab:
       propertyPath: hearts.Array.data[4]
       value: 
       objectReference: {fileID: 575801678}
+    - target: {fileID: 114093990422977176, guid: 2f2e9c5470ec40b4db1d7dc8bef47bf4,
+        type: 2}
+      propertyPath: InventoryUI
+      value: 
+      objectReference: {fileID: 312701333}
+    - target: {fileID: 114486262837141734, guid: 2f2e9c5470ec40b4db1d7dc8bef47bf4,
+        type: 2}
+      propertyPath: timeSlider
+      value: 
+      objectReference: {fileID: 219007671}
+    - target: {fileID: 114486262837141734, guid: 2f2e9c5470ec40b4db1d7dc8bef47bf4,
+        type: 2}
+      propertyPath: timedImage
+      value: 
+      objectReference: {fileID: 892073847}
+    - target: {fileID: 4447540790168102, guid: 2f2e9c5470ec40b4db1d7dc8bef47bf4, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 20447532842299954, guid: 2f2e9c5470ec40b4db1d7dc8bef47bf4,
+        type: 2}
+      propertyPath: orthographic size
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f2e9c5470ec40b4db1d7dc8bef47bf4, type: 2}
   m_IsPrefabParent: 0
@@ -1194,7 +1203,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4761794609714720, guid: 27bfd9365d0255d478aab4a1b53e6fde, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 27bfd9365d0255d478aab4a1b53e6fde, type: 2}
@@ -1524,6 +1533,52 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1325743959}
+--- !u!1001 &1334967122
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4952649099345434, guid: 237ff42a7c7f8794a9a10c6370453cb9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -6.555361
+      objectReference: {fileID: 0}
+    - target: {fileID: 4952649099345434, guid: 237ff42a7c7f8794a9a10c6370453cb9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.442
+      objectReference: {fileID: 0}
+    - target: {fileID: 4952649099345434, guid: 237ff42a7c7f8794a9a10c6370453cb9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4952649099345434, guid: 237ff42a7c7f8794a9a10c6370453cb9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4952649099345434, guid: 237ff42a7c7f8794a9a10c6370453cb9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4952649099345434, guid: 237ff42a7c7f8794a9a10c6370453cb9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4952649099345434, guid: 237ff42a7c7f8794a9a10c6370453cb9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4952649099345434, guid: 237ff42a7c7f8794a9a10c6370453cb9, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319423765762834, guid: 237ff42a7c7f8794a9a10c6370453cb9, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 237ff42a7c7f8794a9a10c6370453cb9, type: 2}
+  m_IsPrefabParent: 0
 --- !u!4 &1464746764 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4843228783347310, guid: 4f19591148573c34290b35e97f0971b9,
@@ -1914,7 +1969,7 @@ Transform:
   - {fileID: 1464746764}
   - {fileID: 1089747770}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1830788405
 Prefab:
@@ -1953,7 +2008,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4052032208122708, guid: 117aa9bd408cfda46a97abefffc3d634, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1128729598396310, guid: 117aa9bd408cfda46a97abefffc3d634, type: 2}
       propertyPath: m_Name

@@ -31,4 +31,10 @@ public class SuperPlantController : MonoBehaviour
         currentPlant++;
         plants[currentPlant].SetActive(true);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+            GetComponent<Animator>().SetTrigger("Bounce");
+    }
 }
