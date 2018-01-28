@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayMusic : MonoBehaviour {
 
     FMOD.Studio.EventInstance ambianceMenu; //Instanciation du son
-    FMOD.Studio.EventInstance ambianceJeu; //Instanciation du son
+    //FMOD.Studio.EventInstance ambianceJeu; //Instanciation du son
 
     FMOD.Studio.EventInstance ambiance;
 
@@ -16,11 +16,16 @@ public class PlayMusic : MonoBehaviour {
 
 	private float resetTime = .01f;					//Very short time used to fade in near instantly without a click
 
+    public GameObject pf_fmodEmitterMenu;
+    private GameObject fmodEmitter;
 
-	void Awake () 
+    void Awake () 
 	{
+        fmodEmitter = Instantiate(pf_fmodEmitterMenu);
+
         ambianceMenu = FMODUnity.RuntimeManager.CreateInstance("event:/Environnement/Menu"); // Chemin du son 
-        ambianceJeu = FMODUnity.RuntimeManager.CreateInstance("event:/Environnement/Ambiance"); // Chemin du son 
+        //ambianceJeu = FMODUnity.RuntimeManager.CreateInstance("event:/Environnement/Ambiance"); // Chemin du son 
+
     }
 
 
@@ -31,17 +36,17 @@ public class PlayMusic : MonoBehaviour {
 		{
 			//If scene index is 0 (usually title scene) assign the clip titleMusic to musicSource
 			case 0:
-                ambiance = ambianceMenu;
-				break;
+                fmodEmitter = Instantiate(pf_fmodEmitterMenu);
+                break;
 			//If scene index is 1 (usually main scene) assign the clip mainMusic to musicSource
 			case 1:
-                ambiance = ambianceJeu;
+                //ambiance = ambianceJeu;
 				break;
 		}
 		//Fade up the volume very quickly, over resetTime seconds (.01 by default)
-		FadeUp (resetTime);
+		//FadeUp (resetTime);
         //Play the assigned music clip in musicSource
-        ambiance.start();
+        //ambiance.start();
     }
 	
 	//Used if running the game in a single scene, takes an integer music source allowing you to choose a clip by number and play.
@@ -53,15 +58,15 @@ public class PlayMusic : MonoBehaviour {
 		{
 		//if musicChoice is 0 assigns titleMusic to audio source
 		case 0:
-                ambiance = ambianceMenu;
-			break;
+                fmodEmitter = Instantiate(pf_fmodEmitterMenu);
+                break;
 			//if musicChoice is 1 assigns mainMusic to audio source
 		case 1:
-                ambiance = ambianceJeu;
+                //ambiance = ambianceJeu;
 			break;
 		}
         //Play the selected clip
-        ambiance.start();
+       // ambiance.start();
 
     }
 
@@ -77,6 +82,8 @@ public class PlayMusic : MonoBehaviour {
 	{
         //call the TransitionTo function of the audioMixerSnapshot volumeDown;
         //volumeDown.TransitionTo (fadeTime);
-        ambiance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        //ambiance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        Destroy(fmodEmitter);
     }
+
 }
