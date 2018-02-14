@@ -84,6 +84,7 @@ public class Inventory : MonoBehaviour {
         }
 
         int nbItems = savedItems.Count;
+        print(nbItems);
 
         for (int i=0; i<nbItems; i++)
         {
@@ -121,6 +122,7 @@ public class Inventory : MonoBehaviour {
     {
         for(int i=0; i<collectedItems.Count; i++)
         {
+            collectedItems[i].canBeTaken = true;
             collectedItems[i].gameObject.SetActive(true);
             StartCoroutine(collectedItems[i].DisableGatherStart());
         }

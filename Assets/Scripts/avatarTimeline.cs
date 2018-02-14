@@ -9,11 +9,11 @@ public class avatarTimeline : MonoBehaviour {
     private AvatarAge age;
     public Collider2D[] colliderObjectsAge;
     public float currentTime;
-    public float lifeExpectancy = 100f;
+    public float lifeExpectancy;
     public Slider timeSlider;
     public Image timedImage;
-    public float flashSpeed = 5f;
-    public float ratioTime = 1;
+    public float flashSpeed;
+    public float ratioTime;
 
     avatarController avatarController;
     bool isDeadOld;
@@ -28,6 +28,7 @@ public class avatarTimeline : MonoBehaviour {
 
         avatarController = GetComponent<avatarController>();
         currentTime = 0f; ;
+		timeSlider.maxValue = lifeExpectancy;
         age = AvatarAge.YOUNG;
 
         essouflement = FMODUnity.RuntimeManager.CreateInstance("event:/Avatar/Essouflement"); // Chemin du son 
